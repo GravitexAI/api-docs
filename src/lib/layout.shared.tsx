@@ -46,10 +46,10 @@ export const linkItems: LinkItemType[] = [
 export const logo = (
   <Image
     alt="New API"
-    src="/assets/newapi.svg"
+    src="https://gravitex-api-oss.tos-ap-southeast-1.bytepluses.com/static/logo.png"
     width={20}
     height={20}
-    className="size-5"
+    className="size-10"
     priority
     unoptimized
   />
@@ -63,7 +63,7 @@ export function baseOptions(locale: string): BaseLayoutProps {
         <>
           {logo}
           <span className="font-medium in-[header]:text-[15px] [.uwu_&]:hidden">
-            New API
+            Gravitex AI
           </span>
         </>
       ),
