@@ -60,7 +60,7 @@ OpenClaw 的配置文件位于 `~/.openclaw/config.json`，可通过引导向导
 
 ### 配置示例
 
-以下是使用 New API 作为模型提供商的完整配置示例：
+以下是使用 Gravitex API 作为模型提供商的完整配置示例：
 
 ```json
 {
@@ -195,8 +195,8 @@ OpenClaw 的配置文件位于 `~/.openclaw/config.json`，可通过引导向导
 
 | 配置项 | 说明 |
 | --- | --- |
-| `models.providers.newapi.baseUrl` | New API 部署地址，需包含 `/v1` |
-| `models.providers.newapi.apiKey` | New API 令牌密钥 |
+| `models.providers.newapi.baseUrl` | Gravitex API 部署地址，需包含 `/v1` |
+| `models.providers.newapi.apiKey` | Gravitex API 令牌密钥 |
 | `models.providers.newapi.models` | 模型列表，可按需添加多个模型 |
 | `agents.defaults.model.primary` | 默认主模型，格式为 `provider/model-id` |
 | `agents.defaults.model.fallbacks` | 备选模型列表，主模型不可用时自动切换 |

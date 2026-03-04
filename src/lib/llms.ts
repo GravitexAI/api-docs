@@ -38,9 +38,9 @@ export function generateLLMsText(
     .sort((a, b) => a.docsUrl.localeCompare(b.docsUrl));
 
   const lines = [
-    `# New API Docs (${lang})`,
+    `# Gravitex AI Docs (${lang})`,
     '',
-    '> LLM-friendly index for New API documentation.',
+    '> LLM-friendly index for Gravitex AI documentation.',
     '',
     '## Preferred Sources',
     `- [Full Documentation](${toAbsoluteUrl(origin, `/${lang}/llms-full.txt`)}): Full corpus in one file.`,

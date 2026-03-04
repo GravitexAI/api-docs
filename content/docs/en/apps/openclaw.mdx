@@ -61,7 +61,7 @@ The OpenClaw configuration file is located at `~/.openclaw/config.json`. It can 
 
 ### Configuration Example
 
-Here is a complete configuration example using New API as the model provider:
+Here is a complete configuration example using Gravitex API as the model provider:
 
 ```json
 {
@@ -196,8 +196,8 @@ Here is a complete configuration example using New API as the model provider:
 
 | Configuration Item | Description |
 | --- | --- |
-| `models.providers.newapi.baseUrl` | New API deployment address, must include `/v1` |
-| `models.providers.newapi.apiKey` | New API token key |
+| `models.providers.newapi.baseUrl` | Gravitex API deployment address, must include `/v1` |
+| `models.providers.newapi.apiKey` | Gravitex API token key |
 | `models.providers.newapi.models` | Model list, add multiple models as needed |
 | `agents.defaults.model.primary` | Default primary model, format: `provider/model-id` |
 | `agents.defaults.model.fallbacks` | Fallback model list, auto-switches when primary is unavailable |

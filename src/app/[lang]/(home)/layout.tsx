@@ -1,23 +1,12 @@
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import { baseOptions, linkItems } from '@/lib/layout.shared';
-import {
-  NavbarMenu,
-  NavbarMenuContent,
-  NavbarMenuLink,
-  NavbarMenuTrigger,
-} from 'fumadocs-ui/layouts/home/navbar';
 import { Footer } from '@/components/footer';
-import Link from 'fumadocs-core/link';
-import Image from 'next/image';
-import Preview from '@/../public/assets/dashboard-dark.png';
 import {
   Rocket,
   Download,
   HelpCircle,
   Sparkles,
-  FileCode,
   BookOpen,
-  type LucideIcon,
 } from 'lucide-react';
 import { getLocalePath } from '@/lib/i18n';
 
@@ -37,10 +26,9 @@ const i18nText: Record<
 > = {
   en: {
     title: { text: 'Documentation', desc: '' },
-    apiDocs: { text: 'Apifox Playground', desc: '' },
     start: {
       text: 'Getting Started',
-      desc: 'Learn how to deploy and configure New API.',
+      desc: 'Learn how to deploy and configure Gravitex AI.',
     },
     install: {
       text: 'Installation',
@@ -58,8 +46,7 @@ const i18nText: Record<
   },
   zh: {
     title: { text: '文档', desc: '' },
-    apiDocs: { text: 'Apifox 操练场', desc: '' },
-    start: { text: '快速开始', desc: '学习如何部署和配置 New API。' },
+    start: { text: '快速开始', desc: '学习如何部署和配置 Gravitex AI。' },
     install: { text: '部署安装', desc: '多种部署方式和安装指南。' },
     support: { text: '帮助支持', desc: '常见问题和社区支持。' },
     api: { text: 'API 参考', desc: '完整的 API 文档和参考指南。' },
@@ -67,8 +54,7 @@ const i18nText: Record<
   },
   ja: {
     title: { text: 'ドキュメント', desc: '' },
-    apiDocs: { text: 'Apifox プレイグラウンド', desc: '' },
-    start: { text: 'はじめに', desc: 'New API のデプロイと設定方法を学ぶ。' },
+    start: { text: 'はじめに', desc: 'Gravitex AI のデプロイと設定方法を学ぶ。' },
     install: {
       text: 'インストール',
       desc: '様々なデプロイ方法とインストールガイド。',
@@ -102,24 +88,6 @@ const buildNavItems = (lang: string, docsUrl: string) => {
   }));
 };
 
-// Menu link item component
-function MenuLinkItem({
-  item,
-  className,
-}: {
-  item: { text: string; desc: string; url: string; Icon: LucideIcon };
-  className?: string;
-}) {
-  const { Icon, text, desc, url } = item;
-  return (
-    <NavbarMenuLink href={url} className={className}>
-      <Icon className="bg-fd-primary text-fd-primary-foreground mb-2 rounded-md p-1" />
-      <p className="font-medium">{text}</p>
-      <p className="text-fd-muted-foreground text-sm">{desc}</p>
-    </NavbarMenuLink>
-  );
-}
-
 export default async function Layout({
   params,
   children,
@@ -129,7 +97,7 @@ export default async function Layout({
 }) {
   const { lang } = await params;
   const texts = getTexts(lang);
-  const docsUrl = getLocalePath(lang, 'docs');
+  const docsUrl = getLocalePath(lang, 'docs/api');
   const navItems = buildNavItems(lang, docsUrl);
 
   return (
@@ -148,66 +116,12 @@ export default async function Layout({
               icon: <Icon />,
             })),
           },
-          {
-            type: 'main',
-            on: 'menu',
-            text: texts.apiDocs.text,
-            url: 'https://apifox.newapi.ai/',
-            icon: <FileCode />,
-            external: true,
-          },
           // Desktop navigation
           {
-            type: 'custom',
-            on: 'nav',
-            children: (
-              <NavbarMenu>
-                <NavbarMenuTrigger>
-                  <Link href={docsUrl}>{texts.title.text}</Link>
-                </NavbarMenuTrigger>
-                <NavbarMenuContent className="text-[15px]">
-                  {/* First item with preview image */}
-                  <NavbarMenuLink href={docsUrl} className="md:row-span-2">
-                    <div className="-mx-3 -mt-3">
-                      <Image
-                        src={Preview}
-                        alt="Preview"
-                        className="rounded-t-lg object-cover"
-                        loading="lazy"
-                        fetchPriority="low"
-                        style={{
-                          maskImage:
-                            'linear-gradient(to bottom,white 60%,transparent)',
-                        }}
-                      />
-                    </div>
-                    <p className="font-medium">{navItems[0].text}</p>
-                    <p className="text-fd-muted-foreground text-sm">
-                      {navItems[0].desc}
-                    </p>
-                  </NavbarMenuLink>
-                  {/* Second column */}
-                  <MenuLinkItem item={navItems[1]} className="lg:col-start-2" />
-                  <MenuLinkItem item={navItems[2]} className="lg:col-start-2" />
-                  {/* Third column */}
-                  <MenuLinkItem
-                    item={navItems[3]}
-                    className="lg:col-start-3 lg:row-start-1"
-                  />
-                  <MenuLinkItem
-                    item={navItems[4]}
-                    className="lg:col-start-3 lg:row-start-2"
-                  />
-                </NavbarMenuContent>
-              </NavbarMenu>
-            ),
-          },
-          {
             type: 'main',
             on: 'nav',
-            text: texts.apiDocs.text,
-            url: 'https://apifox.newapi.ai/',
-            external: true,
+            text: texts.title.text,
+            url: docsUrl,
           },
           ...linkItems,
         ]}

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Github, MessageCircle } from 'lucide-react';
 import { getLocalePath } from '@/lib/i18n';
 
 interface FooterProps {
@@ -36,69 +35,14 @@ const ProductHuntIcon = (
 // ============================================
 // Shared Data (same across all languages)
 // ============================================
-const socialLinks: { name: string; href: string; icon: React.ReactNode }[] = [
-  {
-    name: 'GitHub',
-    href: 'https://github.com/QuantumNous/new-api',
-    icon: <Github className="size-4" />,
-  },
-  {
-    name: 'AtomGit',
-    href: 'https://atomgit.com/QuantumNous/new-api',
-    icon: AtomGitIcon,
-  },
-  {
-    name: 'Gitee',
-    href: 'https://gitee.com/QuantumNous/new-api',
-    icon: GiteeIcon,
-  },
-  {
-    name: 'Docker',
-    href: 'https://hub.docker.com/r/calciumion/new-api',
-    icon: DockerIcon,
-  },
-  {
-    name: 'QQ',
-    href: 'docs/support/community-interaction',
-    icon: <MessageCircle className="size-4" />,
-  },
-  {
-    name: 'Product Hunt',
-    href: 'https://www.producthunt.com/products/new-api',
-    icon: ProductHuntIcon,
-  },
-];
+const socialLinks: { name: string; href: string; icon: React.ReactNode }[] = [];
 
-const beianLinks: { text: string; href: string }[] = [
-  { text: '浙ICP备2025190188号-2', href: 'https://beian.miit.gov.cn/' },
-  {
-    text: '浙公网安备33010602014019号',
-    href: 'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602014019',
-  },
-];
+const beianLinks: { text: string; href: string }[] = [];
 
 // External links (same labels across all languages)
-const relatedProjects: { label: string; href: string }[] = [
-  { label: 'One API', href: 'https://github.com/songquanpeng/one-api' },
-  {
-    label: 'Midjourney-Proxy',
-    href: 'https://github.com/novicezk/midjourney-proxy',
-  },
-  {
-    label: 'neko-api-key-tool',
-    href: 'https://github.com/Calcium-Ion/neko-api-key-tool',
-  },
-];
+const relatedProjects: { label: string; href: string }[] = [];
 
-const friendshipLinks: { label: string; href: string }[] = [
-  { label: 'CoAI', href: 'https://github.com/coaidev/coai' },
-  {
-    label: 'new-api-horizon',
-    href: 'https://github.com/Calcium-Ion/new-api-horizon',
-  },
-  { label: 'GPT-Load', href: 'https://www.gpt-load.com' },
-  { label: 'LangBot', href: 'https://langbot.app' },
-];
+const friendshipLinks: { label: string; href: string }[] = [];
 
 // ============================================
 // Internal link paths (only labels need translation)
@@ -153,7 +97,7 @@ const translations: Record<string, FooterTranslation> = {
       relatedProjects: '相关项目',
       friendshipLinks: '友情链接',
     },
-    copyright: '© 2025 锟腾科技. All Rights Reserved.',
+    copyright: '© 2025 Gravitex AI. All Rights Reserved.',
   },
   en: {
     sections: {
@@ -172,7 +116,7 @@ const translations: Record<string, FooterTranslation> = {
       relatedProjects: 'Related Projects',
       friendshipLinks: 'Friendship Links',
     },
-    copyright: '© 2025 QuantumNous. All Rights Reserved.',
+    copyright: '© 2025 Gravitex AI. All Rights Reserved.',
   },
   ja: {
     sections: {
@@ -191,7 +135,7 @@ const translations: Record<string, FooterTranslation> = {
       relatedProjects: '関連プロジェクト',
       friendshipLinks: '友好リンク',
     },
-    copyright: '© 2025 QuantumNous. All Rights Reserved.',
+    copyright: '© 2025 Gravitex AI. All Rights Reserved.',
   },
 };
 
@@ -242,40 +186,8 @@ export function Footer({ lang }: FooterProps) {
 
   return (
     <footer className="border-fd-border bg-fd-card/30 mt-auto border-t backdrop-blur-sm">
-      <div className="mx-auto max-w-[1400px] px-6 py-12">
-        {/* Top: Links Grid */}
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 pb-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-12">
-          {sections.map((section) => (
-            <div key={section.title}>
-              <h3 className="text-fd-foreground mb-4 text-sm font-semibold">
-                {section.title}
-              </h3>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.href}>
-                    {'external' in link && link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        href={getLocalePath(lang, link.href)}
-                        className="text-fd-muted-foreground hover:text-fd-foreground text-sm transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+      {/* <div className="mx-auto max-w-[1400px] px-6 py-12"> */}
+      <div className="mx-auto max-w-[1400px] px-6">
 
         {/* Bottom: Copyright and Social */}
         <div className="border-fd-border flex flex-col items-start justify-between gap-4 border-t pt-8 sm:flex-row sm:items-center">
