@@ -528,6 +528,9 @@ async function main() {
         version: '1.0.0',
         description: ep.description || undefined,
       },
+      servers: [
+        { url: 'https://api.gravitex.ai' },
+      ],
       tags: tags.map((name) => ({ name })),
       ...(sec.securitySchemes
         ? { components: { securitySchemes: sec.securitySchemes } }

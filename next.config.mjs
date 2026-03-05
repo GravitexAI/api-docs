@@ -13,7 +13,7 @@ const config = {
         // newapi.pro domains
         'docs.newapi.pro',
         'newapi.pro',
-        'www.newapi.pro',
+        'api.gravitex.ai',
         // newapi.ai domains
         'docs.newapi.ai',
         'newapi.ai',
