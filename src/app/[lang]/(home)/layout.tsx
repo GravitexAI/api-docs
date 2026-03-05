@@ -5,7 +5,6 @@ import {
   Rocket,
   Download,
   HelpCircle,
-  Sparkles,
   BookOpen,
 } from 'lucide-react';
 import { getLocalePath } from '@/lib/i18n';
@@ -16,7 +15,6 @@ const NAV_ITEMS = [
   { key: 'install', icon: Download, path: '/installation' },
   { key: 'support', icon: HelpCircle, path: '/support' },
   { key: 'api', icon: BookOpen, path: '/api' },
-  { key: 'apps', icon: Sparkles, path: '/apps' },
 ] as const;
 
 // Internationalization text
@@ -39,10 +37,6 @@ const i18nText: Record<
       text: 'API Reference',
       desc: 'Complete API documentation and reference.',
     },
-    apps: {
-      text: 'AI Applications',
-      desc: 'Integration guides for AI applications.',
-    },
   },
   zh: {
     title: { text: '文档', desc: '' },
@@ -50,7 +44,6 @@ const i18nText: Record<
     install: { text: '部署安装', desc: '多种部署方式和安装指南。' },
     support: { text: '帮助支持', desc: '常见问题和社区支持。' },
     api: { text: 'API 参考', desc: '完整的 API 文档和参考指南。' },
-    apps: { text: 'AI 应用', desc: 'AI 应用集成指南。' },
   },
   ja: {
     title: { text: 'ドキュメント', desc: '' },
@@ -66,10 +59,6 @@ const i18nText: Record<
     api: {
       text: 'API リファレンス',
       desc: '完全な API ドキュメントとリファレンス。',
-    },
-    apps: {
-      text: 'AI アプリケーション',
-      desc: 'AI アプリケーション統合ガイド。',
     },
   },
 };

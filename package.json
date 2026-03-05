@@ -6,7 +6,7 @@
     "prebuild": "tsx scripts/prebuild.ts",
     "build": "next build",
     "dev": "next dev",
-    "start": "next start",
+    "start": "next start -p 3030",
     "postinstall": "fumadocs-mdx",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
