@@ -1,4 +1,4 @@
-﻿---
+---
 title: 宝塔面板部署
 ---
 
@@ -30,7 +30,7 @@ title: 宝塔面板部署
 2. 搜索并找到 **New-API**
 3. 点击 **安装**
 4. 配置以下基本选项：
-   - 容器名称：可自定义，默认为`new-api`
+   - 容器名称：可自定义，默认为`gravitex-api`
    - 端口映射：默认为`3000:3000`
    - 环境变量：根据需要添加（如TZ=Asia/Shanghai等）
    - 目录映射：确保将`/data`目录映射到主机目录
@@ -46,12 +46,12 @@ title: 宝塔面板部署
 
     1. 在宝塔面板Docker功能中，点击 **镜像管理**
     2. 点击 **获取镜像** -> **拉取镜像**
-    3. 输入镜像名称：`calciumion/new-api:latest`
+    3. 输入镜像名称：`calciumion/gravitex-api:latest`
     4. 点击 **提交**，等待镜像拉取完成
     5. 拉取完成后，进入 **容器列表**，点击 **创建容器**
     6. 填写以下信息：
-       - 容器名称：`new-api`（可自定义）
-       - 镜像：选择刚刚拉取的`calciumion/new-api:latest`
+       - 容器名称：`gravitex-api`（可自定义）
+       - 镜像：选择刚刚拉取的`calciumion/gravitex-api:latest`
        - 端口映射：添加`3000:3000`
        - 目录映射：添加`/your/host/path:/data`（替换为您的主机路径）
        - 环境变量：根据需要添加（如TZ=Asia/Shanghai等）

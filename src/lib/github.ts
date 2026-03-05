@@ -3,7 +3,7 @@ import type { ActionResponse, Feedback } from '@/components/feedback';
 
 // GitHub repository info
 export const owner = 'QuantumNous';
-export const repo = 'new-api-docs-v1';
+export const repo = 'gravitex-api-docs-v1';
 export const DocsCategory = 'Docs Feedback'; // GitHub Discussion
 
 let instance: Octokit | undefined;

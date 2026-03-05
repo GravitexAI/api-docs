@@ -1,5 +1,5 @@
 {
-  "name": "new-api-docs-v1",
+  "name": "gravitex-api-docs-v1",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -29,7 +29,7 @@
     "clsx": "^2.1.1",
     "fumadocs-core": "16.0.10",
     "fumadocs-mdx": "13.0.7",
-    "fumadocs-openapi": "^10.1.0",
+    "fumadocs-openapi": "10.1.0",
     "fumadocs-ui": "16.0.10",
     "hast-util-to-jsx-runtime": "^2.3.6",
     "katex": "^0.16.25",

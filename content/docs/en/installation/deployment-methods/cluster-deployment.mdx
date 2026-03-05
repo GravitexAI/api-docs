@@ -60,14 +60,14 @@ Create a `docker-compose.yml` file on the master node server:
 
 ```yaml
 services:
-  new-api-master:
-    image: calciumion/new-api:latest
-    container_name: new-api-master
+  gravitex-api-master:
+    image: calciumion/gravitex-api:latest
+    container_name: gravitex-api-master
     restart: always
     ports:
       - '3000:3000'
     environment:
-      - SQL_DSN=root:password@tcp(your-db-host:3306)/new-api
+      - SQL_DSN=root:password@tcp(your-db-host:3306)/gravitex-api
       - REDIS_CONN_STRING=redis://default:password@your-redis-host:6379
       - SESSION_SECRET=your_unique_session_secret
       - CRYPTO_SECRET=your_unique_crypto_secret
@@ -97,14 +97,14 @@ Create a `docker-compose.yml` file on each slave node server:
 
 ```yaml
 services:
-  new-api-slave:
-    image: calciumion/new-api:latest
-    container_name: new-api-slave
+  gravitex-api-slave:
+    image: calciumion/gravitex-api:latest
+    container_name: gravitex-api-slave
     restart: always
     ports:
       - '3000:3000' # 可以与主节点使用相同端口，因为它们在不同服务器上
     environment:
-      - SQL_DSN=root:password@tcp(your-db-host:3306)/new-api # 与主节点相同
+      - SQL_DSN=root:password@tcp(your-db-host:3306)/gravitex-api # 与主节点相同
       - REDIS_CONN_STRING=redis://default:password@your-redis-host:6379 # 与主节点相同
       - SESSION_SECRET=your_unique_session_secret # 必须与主节点相同
       - CRYPTO_SECRET=your_unique_crypto_secret # 必须与主节点相同

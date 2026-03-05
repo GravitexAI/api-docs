@@ -7,7 +7,7 @@ export const linkItems: LinkItemType[] =[];
 //  [
 //   {
 //     type: 'icon',
-//     url: 'https://github.com/QuantumNous/new-api',
+//     url: 'https://github.com/QuantumNous/gravitex-api',
 //     label: 'GitHub',
 //     text: 'GitHub',
 //     icon: (
@@ -24,7 +24,7 @@ export const linkItems: LinkItemType[] =[];
 //   },
 //   {
 //     type: 'icon',
-//     url: 'https://atomgit.com/QuantumNous/new-api',
+//     url: 'https://atomgit.com/QuantumNous/gravitex-api',
 //     label: 'AtomGit',
 //     text: 'AtomGit',
 //     icon: (

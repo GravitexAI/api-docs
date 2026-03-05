@@ -56,7 +56,7 @@ export GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
 docker run -d \
   -e GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX \
   ...その他のオプション...
-  calciumion/new-api:latest
+  calciumion/gravitex-api:latest
 ```
 
 #### 3. アプリケーションの再起動
@@ -159,7 +159,7 @@ environment:
 
 ```bash
 # 環境変数が設定されているか確認
-docker exec new-api env | grep -E "GOOGLE_ANALYTICS|UMAMI"
+docker exec gravitex-api env | grep -E "GOOGLE_ANALYTICS|UMAMI"
 ```
 
 ---

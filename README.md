@@ -1,4 +1,4 @@
-# new-api-docs-v1
+# gravitex-api-docs-v1
 
 A Next.js documentation site for Gravitex API.
 

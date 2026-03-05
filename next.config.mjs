@@ -19,7 +19,7 @@ const config = {
         'newapi.ai',
         'www.newapi.ai',
         // Vercel preview
-        'new-api-docs-v1.vercel.app',
+        'gravitex-api-docs-v1.vercel.app',
       ],
     },
   },

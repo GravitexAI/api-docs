@@ -21,12 +21,12 @@ title: 環境変数設定ガイド
 
 | 環境変数                | 説明                           | デフォルト値                     | 例                                                                                                                             |
 | ----------------------- | ------------------------------ | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `SQL_DSN`               | データベース接続文字列         | SQLite (data/one-api.db)         | MySQL: `SQL_DSN=root:123456@tcp(localhost:3306)/new-api` \| PostgreSQL: `SQL_DSN=postgresql://root:123456@postgres:5432/new-api` |
+| `SQL_DSN`               | データベース接続文字列         | SQLite (data/one-api.db)         | MySQL: `SQL_DSN=root:123456@tcp(localhost:3306)/gravitex-api` \| PostgreSQL: `SQL_DSN=postgresql://root:123456@postgres:5432/gravitex-api` |
 | `SQL_MAX_IDLE_CONNS`    | アイドル接続プール最大接続数   | `100`                            | `SQL_MAX_IDLE_CONNS=50`                                                                                                          |
 | `SQL_MAX_OPEN_CONNS`    | 接続プール最大オープン接続数   | `1000`                           | `SQL_MAX_OPEN_CONNS=500`                                                                                                         |
 | `SQL_MAX_LIFETIME`      | 接続最大ライフタイム(分)       | `60`                             | `SQL_MAX_LIFETIME=120`                                                                                                          |
 | `LOG_SQL_DSN`           | ログテーブル独立データベース接続文字列 | -                                | `LOG_SQL_DSN=root:123456@tcp(localhost:3306)/oneapi_logs`                                                                        |
-| `SQLITE_PATH`           | SQLiteデータベースパス         | `/path/to/sqlite.db`             | `SQLITE_PATH=/var/lib/new-api/new-api.db`                                                                                        |
+| `SQLITE_PATH`           | SQLiteデータベースパス         | `/path/to/sqlite.db`             | `SQLITE_PATH=/var/lib/gravitex-api/gravitex-api.db`                                                                                        |
 
 ## キャッシュ設定
 
@@ -209,8 +209,8 @@ SYNC_FREQUENCY=60
 
 ```yaml
 services:
-  new-api:
-    image: calciumion/new-api:latest
+  gravitex-api:
+    image: calciumion/gravitex-api:latest
     environment:
       - TZ=Asia/Shanghai
       - SQL_DSN=root:123456@tcp(mysql:3306)/oneapi

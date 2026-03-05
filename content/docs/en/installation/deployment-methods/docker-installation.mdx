@@ -22,11 +22,11 @@ This document provides detailed steps for deploying Gravitex API using Docker.
 ### Using SQLite Database (Not Recommended)
 
 ```shell
-docker run --name new-api -d --restart always \
+docker run --name gravitex-api -d --restart always \
   -p 3000:3000 \
   -e TZ=Asia/Shanghai \
   -v /your/data/path:/data \
-  calciumion/new-api:latest
+  calciumion/gravitex-api:latest
 ```
 
 <Callout type="warn" title="Note">
@@ -37,12 +37,12 @@ docker run --name new-api -d --restart always \
 ### Using MySQL Database
 
 ```shell
-docker run --name new-api -d --restart always \
+docker run --name gravitex-api -d --restart always \
   -p 3000:3000 \
   -e SQL_DSN="用户名:密码@tcp(数据库地址:3306)/数据库名" \
   -e TZ=Asia/Shanghai \
   -v /your/data/path:/data \
-  calciumion/new-api:latest
+  calciumion/gravitex-api:latest
 ```
 
 <Callout type="warn" title="Note">
