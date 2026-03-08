@@ -1,0 +1,9 @@
+{
+  "title": "Skills",
+  "description": "AI Editor Skills Extension",
+  "icon": "Puzzle",
+  "root": true,
+  "pages": [
+    "index"
+  ]
+}

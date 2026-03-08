@@ -1,0 +1,9 @@
+{
+  "title": "Skills",
+  "description": "AI エディター Skills 拡張",
+  "icon": "Puzzle",
+  "root": true,
+  "pages": [
+    "index"
+  ]
+}

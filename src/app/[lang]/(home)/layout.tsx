@@ -17,6 +17,7 @@ import {
   Sparkles,
   FileCode,
   BookOpen,
+  Puzzle,
   type LucideIcon,
 } from 'lucide-react';
 import { getLocalePath } from '@/lib/i18n';
@@ -38,6 +39,7 @@ const i18nText: Record<
   en: {
     title: { text: 'Documentation', desc: '' },
     apiDocs: { text: 'Apifox Playground', desc: '' },
+    skills: { text: 'Skills', desc: '' },
     start: {
       text: 'Getting Started',
       desc: 'Learn how to deploy and configure New API.',
@@ -59,6 +61,7 @@ const i18nText: Record<
   zh: {
     title: { text: '文档', desc: '' },
     apiDocs: { text: 'Apifox 操练场', desc: '' },
+    skills: { text: 'Skills', desc: '' },
     start: { text: '快速开始', desc: '学习如何部署和配置 New API。' },
     install: { text: '部署安装', desc: '多种部署方式和安装指南。' },
     support: { text: '帮助支持', desc: '常见问题和社区支持。' },
@@ -68,6 +71,7 @@ const i18nText: Record<
   ja: {
     title: { text: 'ドキュメント', desc: '' },
     apiDocs: { text: 'Apifox プレイグラウンド', desc: '' },
+    skills: { text: 'Skills', desc: '' },
     start: { text: 'はじめに', desc: 'New API のデプロイと設定方法を学ぶ。' },
     install: {
       text: 'インストール',
@@ -151,6 +155,13 @@ export default async function Layout({
           {
             type: 'main',
             on: 'menu',
+            text: texts.skills.text,
+            url: `${docsUrl}/skills`,
+            icon: <Puzzle />,
+          },
+          {
+            type: 'main',
+            on: 'menu',
             text: texts.apiDocs.text,
             url: 'https://apifox.newapi.ai/',
             icon: <FileCode />,
@@ -200,6 +211,21 @@ export default async function Layout({
                   />
                 </NavbarMenuContent>
               </NavbarMenu>
+            ),
+          },
+          {
+            type: 'custom',
+            on: 'nav',
+            children: (
+              <Link
+                href={`${docsUrl}/skills`}
+                className="inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+              >
+                {texts.skills.text}
+                <span className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-white">
+                  New
+                </span>
+              </Link>
             ),
           },
           {
