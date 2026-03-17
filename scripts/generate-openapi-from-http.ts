@@ -376,7 +376,7 @@ async function readHttpSource(): Promise<HttpTxtRoot> {
 
 async function tryReadApifoxProjectDefs(): Promise<Map<string, any>> {
   const p =
-    process.env.APIFOX_PROJECT_FILE?.trim() || './openapi/NewAPI.apifox.json';
+    process.env.APIFOX_PROJECT_FILE?.trim() || './openapi/GravitexAPI.apifox.json';
   try {
     const raw = await readFile(p, 'utf8');
     const project = JSON.parse(raw) as unknown;
@@ -403,7 +403,7 @@ async function tryReadApifoxProjectSecuritySchemes(): Promise<
   Map<number, { name: string; scheme: OpenApiSecuritySchemeObject }>
 > {
   const p =
-    process.env.APIFOX_PROJECT_FILE?.trim() || './openapi/NewAPI.apifox.json';
+    process.env.APIFOX_PROJECT_FILE?.trim() || './openapi/GravitexAPI.apifox.json';
   try {
     const raw = await readFile(p, 'utf8');
     const project = JSON.parse(raw) as unknown;
@@ -528,6 +528,9 @@ async function main() {
         version: '1.0.0',
         description: ep.description || undefined,
       },
+      servers: [
+        { url: 'https://api.gravitex.ai' },
+      ],
       tags: tags.map((name) => ({ name })),
       ...(sec.securitySchemes
         ? { components: { securitySchemes: sec.securitySchemes } }

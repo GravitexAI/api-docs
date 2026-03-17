@@ -4,16 +4,16 @@ export function createMetadata(override: Metadata): Metadata {
   return {
     ...override,
     icons: {
-      icon: '/favicon.ico',
-      shortcut: '/favicon.ico',
-      apple: '/assets/logo.png',
+      icon: '/assets/favicon.ico',
+      shortcut: '/assets/favicon.ico',
+      apple: '/assets/favicon.ico',
     },
     openGraph: {
       title: override.title ?? undefined,
       description: override.description ?? undefined,
-      url: 'https://www.newapi.ai',
+      url: 'https://client.gravitex.ai',
       images: '/assets/logo.png',
-      siteName: 'New API',
+      siteName: 'Gravitex AI',
       type: 'website',
       ...override.openGraph,
     },

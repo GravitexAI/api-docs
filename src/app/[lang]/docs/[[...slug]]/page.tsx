@@ -15,7 +15,7 @@ import { onRateAction } from '@/lib/github';
 
 // GitHub repository info for source links
 const owner = 'QuantumNous';
-const repo = 'new-api-docs-v1';
+const repo = 'gravitex-api-docs-v1';
 const branch = 'main';
 
 export default async function Page(props: {

@@ -1,8 +1,8 @@
-﻿---
+---
 title: Docker デプロイ
 ---
 
-このドキュメントでは、Dockerを使用してNew APIをデプロイする詳細な手順を説明します。
+このドキュメントでは、Dockerを使用してGravitex APIをデプロイする詳細な手順を説明します。
 
 <Callout type="warn" title="強く推奨">
   Dockerコンテナを手動で起動するのではなく、[Docker Compose
@@ -20,11 +20,11 @@ title: Docker デプロイ
 ### SQLiteデータベースの使用（非推奨）
 
 ```shell
-docker run --name new-api -d --restart always \
+docker run --name gravitex-api -d --restart always \
   -p 3000:3000 \
   -e TZ=Asia/Shanghai \
   -v /your/data/path:/data \
-  calciumion/new-api:latest
+  calciumion/gravitex-api:latest
 ```
 
 <Callout type="warn" title="注意">
@@ -34,12 +34,12 @@ docker run --name new-api -d --restart always \
 ### MySQLデータベースの使用
 
 ```shell
-docker run --name new-api -d --restart always \
+docker run --name gravitex-api -d --restart always \
   -p 3000:3000 \
   -e SQL_DSN="用户名:密码@tcp(数据库地址:3306)/数据库名" \
   -e TZ=Asia/Shanghai \
   -v /your/data/path:/data \
-  calciumion/new-api:latest
+  calciumion/gravitex-api:latest
 ```
 
 <Callout type="warn" title="注意">

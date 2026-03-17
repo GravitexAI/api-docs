@@ -69,6 +69,149 @@ openclaw gateway status
 ```
 
 ```bash
+openclaw onboard
+```
+
+## 🚀 設定方法
+
+### 設定ファイルの場所
+
+OpenClawの設定ファイルは `~/.openclaw/config.json` にあります。オンボーディングウィザードで自動生成するか、手動で編集できます。
+
+### 設定例
+
+以下は、Gravitex APIをモデルプロバイダーとして使用する完全な設定例です：
+
+```json
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.1",
+    "lastTouchedAt": "2026-02-03T12:17:41.559Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-02T21:17:16.011Z",
+    "lastRunVersion": "2026.2.1",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "cooldowns": {
+      "billingBackoffHoursByProvider": {}
+    }
+  },
+  "models": {
+    "providers": {
+      "newapi": {
+        "baseUrl": "https://your-newapi-domain.com/v1",
+        "apiKey": "sk-your-api-key",
+        "auth": "api-key",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "gemini-3-flash-preview",
+            "name": "gemini-3-flash-preview",
+            "api": "openai-completions",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "kimi-k2.5",
+            "name": "kimi-k2.5",
+            "api": "openai-completions",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 64000
+          }
+        ]
+      }
+    },
+    "bedrockDiscovery": {
+      "providerFilter": []
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "newapi/gemini-3-flash-preview",
+        "fallbacks": [
+          "newapi/kimi-k2.5"
+        ]
+      },
+      "models": {
+        "newapi/gemini-3-flash-preview": {
+          "alias": "gemini-3-flash-preview"
+        },
+        "newapi/kimi-k2.5": {
+          "alias": "kimi-k2.5"
+        }
+      },
+      "workspace": "/home/your-username/.openclaw/workspace",
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "channels": {
+    "lark": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "appId": "your-lark-app-id",
+      "appSecret": "your-lark-app-secret",
+      "groupPolicy": "allowlist",
+      "streamMode": "partial"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "your-secure-token"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  }
+}
+```
+
+### 主要設定項目
 openclaw dashboard
 ```
 
@@ -148,6 +291,15 @@ export NEWAPI_API_KEY="sk-your-newapi-key"
 
 | 設定項目 | 説明 |
 | --- | --- |
+| `models.providers.newapi.baseUrl` | Gravitex APIデプロイアドレス、`/v1`を含める必要があります |
+| `models.providers.newapi.apiKey` | Gravitex APIトークンキー |
+| `models.providers.newapi.models` | モデルリスト、必要に応じて複数のモデルを追加 |
+| `agents.defaults.model.primary` | デフォルトのプライマリモデル、形式：`provider/model-id` |
+| `agents.defaults.model.fallbacks` | フォールバックモデルリスト、プライマリが利用不可の場合に自動切替 |
+| `channels.lark.appId` | Lark（飛書）アプリID、Larkオープンプラットフォームから取得 |
+| `channels.lark.appSecret` | Lark（飛書）アプリSecret |
+| `gateway.port` | ゲートウェイリスニングポート |
+| `gateway.auth.token` | ゲートウェイアクセスセキュリティトークン |
 | `models.mode` | `merge`に設定することをお勧めします。OpenClawの組み込みプロバイダーを保持しつつ、`newapi`を追加します。 |
 | `models.providers.newapi.baseUrl` | あなたのNew APIアドレス。通常`/v1`を含める必要があります。 |
 | `models.providers.newapi.apiKey` | New APIキー。`${NEWAPI_API_KEY}`を通じて注入することを推奨します。 |

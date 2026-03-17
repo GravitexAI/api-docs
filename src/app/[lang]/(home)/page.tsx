@@ -1,7 +1,6 @@
-import Link from 'next/link';
-import { Github, BookOpen } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { Hero } from './page.client';
-import { getLocalePath, i18n } from '@/lib/i18n';
+import { i18n } from '@/lib/i18n';
 import Image from 'next/image';
 
 const contentMap: Record<
@@ -12,13 +11,10 @@ const contentMap: Record<
     subtitle: string;
     highlight: string;
     getStarted: string;
-    github: string;
     partnersTitle: string;
     partnersSubtitle: string;
     sponsorPartnersTitle: string;
     sponsorPartnersSubtitle: string;
-    devContributorsTitle: string;
-    docsContributorsTitle: string;
   }
 > = {
   en: {
@@ -26,14 +22,11 @@ const contentMap: Record<
     title: 'Connect all AI providers, manage your AI assets,',
     subtitle: 'build the',
     highlight: 'future',
-    getStarted: 'Getting Started',
-    github: 'GitHub',
+    getStarted: 'Started',
     partnersTitle: 'Our Partners & Clients',
     partnersSubtitle: 'In no particular order',
     sponsorPartnersTitle: 'Sponsor Partners',
     sponsorPartnersSubtitle: 'Trusted sponsor collaborations',
-    devContributorsTitle: 'Development Contributors',
-    docsContributorsTitle: 'Documentation Contributors',
   },
   zh: {
     badge: '人工智能应用基座',
@@ -41,13 +34,10 @@ const contentMap: Record<
     subtitle: '连接',
     highlight: '未来',
     getStarted: '快速开始',
-    github: 'GitHub',
     partnersTitle: '我们的合作伙伴与客户',
     partnersSubtitle: '排名不分先后',
     sponsorPartnersTitle: '赞助合作伙伴',
     sponsorPartnersSubtitle: '值得信赖的赞助合作',
-    devContributorsTitle: '开发贡献者',
-    docsContributorsTitle: '文档贡献者',
   },
   ja: {
     badge: 'あなたの AI ユニバースの基盤',
@@ -55,13 +45,10 @@ const contentMap: Record<
     subtitle: '',
     highlight: '未来を構築',
     getStarted: 'はじめに',
-    github: 'GitHub',
     partnersTitle: '私たちのパートナーとお客様',
     partnersSubtitle: '順不同',
     sponsorPartnersTitle: 'スポンサーパートナー',
     sponsorPartnersSubtitle: '信頼できるスポンサー協力',
-    devContributorsTitle: '開発貢献者',
-    docsContributorsTitle: 'ドキュメント貢献者',
   },
 } as const;
 
@@ -130,28 +117,19 @@ export default async function Page({
             <span className="text-brand">{content.highlight}</span>.
           </h1>
           <div className="flex w-fit flex-row flex-wrap items-center justify-center gap-4">
-            <Link
-              href={getLocalePath(lang, 'docs')}
+            <a
+              href="https://client.gravitex.ai"
               className="bg-brand text-brand-foreground hover:bg-brand-200 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-medium tracking-tight transition-colors max-sm:text-sm"
             >
               <BookOpen className="size-4" />
               {content.getStarted}
-            </Link>
-            <a
-              href="https://github.com/QuantumNous/new-api"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 font-medium tracking-tight transition-colors max-sm:text-sm"
-            >
-              <Github className="size-4" />
-              {content.github}
             </a>
           </div>
         </div>
       </div>
 
       {/* Partners Section */}
-      <section className="mx-auto mt-12 max-w-[1400px] px-4 text-center">
+      {/* <section className="mx-auto mt-12 max-w-[1400px] px-4 text-center">
         <h2 className="text-2xl font-semibold md:text-3xl">
           {content.partnersTitle}
         </h2>
@@ -179,10 +157,10 @@ export default async function Page({
             </a>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Sponsor Partners Section */}
-      <section className="mx-auto mt-16 max-w-[1400px] px-4 text-center">
+      {/* <section className="mx-auto mt-16 max-w-[1400px] px-4 text-center">
         <h2 className="text-2xl font-semibold md:text-3xl">
           {content.sponsorPartnersTitle}
         </h2>
@@ -216,51 +194,8 @@ export default async function Page({
             </a>
           ))}
         </div>
-      </section>
+      </section> */}
 
-      {/* Development Contributors Section */}
-      <section className="mx-auto mt-16 max-w-[1400px] px-4 text-center">
-        <h2 className="text-2xl font-semibold md:text-3xl">
-          {content.devContributorsTitle}
-        </h2>
-        <div className="mt-8 flex justify-center">
-          <a
-            href="https://github.com/QuantumNous/new-api/graphs/contributors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="https://contrib.rocks/image?repo=QuantumNous/new-api"
-              alt="Development Contributors"
-              loading="lazy"
-              decoding="async"
-              className="max-w-full"
-            />
-          </a>
-        </div>
-      </section>
-
-      {/* Documentation Contributors Section */}
-      <section className="mx-auto mt-16 max-w-[1400px] px-4 text-center">
-        <h2 className="text-2xl font-semibold md:text-3xl">
-          {content.docsContributorsTitle}
-        </h2>
-        <div className="mt-8 flex justify-center">
-          <a
-            href="https://github.com/QuantumNous/new-api-docs-v1/graphs/contributors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="https://contrib.rocks/image?repo=QuantumNous/new-api-docs-v1"
-              alt="Documentation Contributors"
-              loading="lazy"
-              decoding="async"
-              className="max-w-full"
-            />
-          </a>
-        </div>
-      </section>
     </main>
   );
 }
