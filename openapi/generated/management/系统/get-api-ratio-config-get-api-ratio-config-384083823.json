@@ -5,6 +5,11 @@
     "version": "1.0.0",
     "description": "🔓 无需鉴权"
   },
+  "servers": [
+    {
+      "url": "https://api.gravitex.ai"
+    }
+  ],
   "tags": [
     {
       "name": "系统"
