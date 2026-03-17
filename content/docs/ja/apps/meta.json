@@ -5,16 +5,10 @@
   "root": true,
   "pages": [
     "index",
-    "aionui",
-    "cc-switch",
-    "cherry-studio",
-    "fluent-read",
     "openclaw",
-    "langbot",
-    "luna-translator",
-    "astrbot",
+    "cherry-studio",
     "claude-code",
     "codex-cli",
-    "factory-droid-cli"
+    "fluent-read"
   ]
 }

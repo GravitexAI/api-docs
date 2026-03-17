@@ -81,8 +81,8 @@ OpenClaw 的配置文件位于 `~/.openclaw/config.json`，可通过引导向导
   },
   "models": {
     "providers": {
-      "newapi": {
-        "baseUrl": "https://your-newapi-domain.com/v1",
+      "gravitexapi": {
+        "baseUrl": "https://api.gravitex.ai/v1",
         "apiKey": "sk-your-api-key",
         "auth": "api-key",
         "api": "openai-completions",
@@ -133,16 +133,16 @@ OpenClaw 的配置文件位于 `~/.openclaw/config.json`，可通过引导向导
   "agents": {
     "defaults": {
       "model": {
-        "primary": "newapi/gemini-3-flash-preview",
+        "primary": "gravitexapi/gemini-3-flash-preview",
         "fallbacks": [
-          "newapi/kimi-k2.5"
+          "gravitexapi/kimi-k2.5"
         ]
       },
       "models": {
-        "newapi/gemini-3-flash-preview": {
+        "gravitexapi/gemini-3-flash-preview": {
           "alias": "gemini-3-flash-preview"
         },
-        "newapi/kimi-k2.5": {
+        "gravitexapi/kimi-k2.5": {
           "alias": "kimi-k2.5"
         }
       },
@@ -195,9 +195,9 @@ OpenClaw 的配置文件位于 `~/.openclaw/config.json`，可通过引导向导
 
 | 配置项 | 说明 |
 | --- | --- |
-| `models.providers.newapi.baseUrl` | Gravitex API 部署地址，需包含 `/v1` |
-| `models.providers.newapi.apiKey` | Gravitex API 令牌密钥 |
-| `models.providers.newapi.models` | 模型列表，可按需添加多个模型 |
+| `models.providers.gravitexapi.baseUrl` | Gravitex API 部署地址，需包含 `/v1` |
+| `models.providers.gravitexapi.apiKey` | Gravitex API 令牌密钥 |
+| `models.providers.gravitexapi.models` | 模型列表，可按需添加多个模型 |
 | `agents.defaults.model.primary` | 默认主模型，格式为 `provider/model-id` |
 | `agents.defaults.model.fallbacks` | 备选模型列表，主模型不可用时自动切换 |
 | `channels.lark.appId` | 飞书应用的 App ID，从飞书开放平台获取 |
