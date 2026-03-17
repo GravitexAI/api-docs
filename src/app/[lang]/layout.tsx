@@ -8,9 +8,9 @@ import { notFound } from 'next/navigation';
 
 const { provider } = defineI18nUI(i18n, {
   translations: {
-    en: {
-      displayName: 'English',
-    },
+    // en: {
+    //   displayName: 'English',
+    // },
     zh: {
       displayName: '简体中文',
       search: '搜索文档',
@@ -23,18 +23,18 @@ const { provider } = defineI18nUI(i18n, {
       previousPage: '上一页',
       tocNoHeadings: '目录为空',
     },
-    ja: {
-      displayName: '日本語',
-      search: 'ドキュメントを検索',
-      searchNoResult: '結果が見つかりません',
-      toc: '目次',
-      lastUpdate: '最終更新',
-      chooseTheme: 'テーマを選択',
-      chooseLanguage: '言語を選択',
-      nextPage: '次のページ',
-      previousPage: '前のページ',
-      tocNoHeadings: '見出しがありません',
-    },
+    // ja: {
+    //   displayName: '日本語',
+    //   search: 'ドキュメントを検索',
+    //   searchNoResult: '結果が見つかりません',
+    //   toc: '目次',
+    //   lastUpdate: '最終更新',
+    //   chooseTheme: 'テーマを選択',
+    //   chooseLanguage: '言語を選択',
+    //   nextPage: '次のページ',
+    //   previousPage: '前のページ',
+    //   tocNoHeadings: '見出しがありません',
+    // },
   },
 });
 
