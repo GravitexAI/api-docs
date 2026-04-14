@@ -12,8 +12,7 @@
 | oauth-bind.png | 第三方账号绑定 |
 | token-list.png | 令牌列表页 |
 | token-create.png | 创建令牌弹窗 |
-| token-key.png | 查看令牌 Key |
-| playground.png | Playground 页面 |
+| playground.png | 操练场页面 |
 | api-address.png | 首页 API 地址 |
 | log-list.png | 个人日志页 |
 | log-filter.png | 日志搜索过滤 |
@@ -23,9 +22,9 @@
 | invite.png | 邀请码与返利 |
 | subscription-plans.png | 订阅套餐列表 |
 | subscription-status.png | 当前订阅状态 |
+| pricing.png | 定价页全貌 |
 | task-list.png | 任务列表页 |
 | mj-detail.png | Midjourney 任务详情 |
-| checkin.png | 签到入口 |
 | channel-list.png | 渠道列表页 |
 | channel-add-basic.png | 添加渠道（基础信息） |
 | channel-add-advanced.png | 添加渠道（高级配置） |

@@ -1,21 +1,15 @@
-﻿---
+---
 title: カスタム OAuth プロバイダー
 description: OIDC 準拠のカスタムログイン方法を追加
 ---
 
 組み込みの OAuth プロバイダーに加えて、Root は OIDC 準拠のカスタムログイン方法を追加できます。Root アカウントでログイン後、システム設定（`/console/setting`）に移動して「カスタム OAuth」セクションを見つけてください。
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：カスタム OAuth プロバイダー一覧</div>
-
 ## カスタム OAuth プロバイダーの追加
 
 1. 「プロバイダーを追加」をクリックすると設定ダイアログが表示されます
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：カスタム OAuth 追加ダイアログ</div>
-
 2. 「Discovery URL」フィールドに OIDC プロバイダーの Discovery アドレス（通常 `/.well-known/openid-configuration` で終わる）を入力し、「自動検出」をクリックすると、システムが Authorization Endpoint、Token Endpoint などの設定を自動入力します
-
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：自動検出後に設定項目が自動入力された状態</div>
 
 3. Client ID と Client Secret を入力します（OAuth プロバイダーのアプリ管理ページから取得）
 4. 表示名を入力します（ログインページでユーザーに表示されるボタンのテキスト）

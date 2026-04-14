@@ -1,4 +1,4 @@
-﻿---
+---
 title: Channel Management
 description: Channels are the core configuration unit for connecting AI providers
 ---
@@ -6,8 +6,6 @@ description: Channels are the core configuration unit for connecting AI provider
 import { Callout } from 'fumadocs-ui/components/callout';
 
 Channels are the core configuration unit for connecting AI providers — each channel corresponds to one provider's API key. Log in with an admin account, then click "Channels" in the left sidebar or visit `/console/channel` directly.
-
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 Screenshot placeholder: Channel list page</div>
 
 The channel list shows all configured AI provider channels with their name, type, status (green = active / red = disabled), response time, and used quota.
 
@@ -17,12 +15,8 @@ The channel list shows all configured AI provider channels with their name, type
 2. Select the provider type (e.g. OpenAI, Claude, Gemini)
 3. Enter the channel name and API key
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 Screenshot placeholder: Add channel dialog (basic info)</div>
-
 4. Check the models this channel supports in the model list, or click "Fill Default Models" to auto-populate
 5. Expand the advanced config section as needed and fill in optional fields:
-
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 Screenshot placeholder: Add channel dialog (advanced config)</div>
 
 | Option | Description |
 | --- | --- |
@@ -40,16 +34,12 @@ The channel list shows all configured AI provider channels with their name, type
 1. Find the target channel in the list and click the "Test" button in the action column on the right
 2. Wait for the test request to complete — a dialog shows the response time and success/failure status
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 Screenshot placeholder: Channel test result dialog</div>
-
 Lower response time means faster performance. You can also click "Test All Channels" at the top of the list for one-click batch testing.
 
 ## Batch Operations
 
 1. Check the checkboxes on the left side of multiple channel rows
 2. A batch operation toolbar appears at the top of the page
-
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 Screenshot placeholder: Batch operation toolbar after selecting multiple channels</div>
 
 3. Click the corresponding button to perform the batch operation:
    - **Batch Enable**: Set selected channels to active
@@ -62,8 +52,6 @@ Multi-Key mode lets a single channel use multiple API keys with automatic pollin
 
 1. Click the "Edit" button on the right side of the target channel row
 2. Find the "Multi-Key Management" section in the edit dialog
-
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 Screenshot placeholder: Multi-Key mode configuration section</div>
 
 3. Click "Add Key" to enter multiple API keys one by one
 4. Select a polling mode:

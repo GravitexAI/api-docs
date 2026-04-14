@@ -1,4 +1,4 @@
-﻿---
+---
 title: チャンネル管理
 description: チャンネルは AI プロバイダーに接続するためのコア設定単位
 ---
@@ -7,19 +7,13 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 チャンネルは AI プロバイダーに接続するためのコア設定単位です。各チャンネルはプロバイダーの API キーに対応します。管理者アカウントでログイン後、左側ナビゲーションの「チャンネル」をクリックするか、`/console/channel` に直接アクセスしてください。
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：チャンネル一覧ページ</div>
-
 チャンネル一覧には設定済みのすべての AI プロバイダーチャンネルが表示されます。名前、タイプ、ステータス（緑=正常 / 赤=無効）、応答時間、使用済みクォータが含まれます。
 
 ## チャンネルの追加
 
 チャンネル一覧ページの「チャンネルを追加」をクリックしてください。
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：チャンネル追加（基本情報）</div>
-
 プロバイダータイプを選択し、API キーを入力して、このチャンネルが対応するモデル一覧を指定してください。
-
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：チャンネル追加（詳細設定）</div>
 
 詳細設定ではカスタムエンドポイント URL、優先度と重みの設定、モデル名マッピングが可能です。
 
@@ -36,23 +30,17 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 チャンネル行の右側にある「テスト」ボタンをクリックして結果を待ちます。
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：チャンネルテスト結果</div>
-
 テストでチャンネルの接続性を確認できます。応答時間が短いほど高速です。単一テストと全チャンネル一括テストに対応しています。
 
 ## 一括操作
 
 一覧で複数のチャンネルを選択すると、上部に一括操作ツールバーが表示されます。
 
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：一括操作ツールバー</div>
-
 一括有効化、無効化、タグ付けなどの操作で統一管理が可能です。
 
 ## マルチキーモード
 
 チャンネル行の「編集」をクリックし、マルチキー管理セクションを見つけてください。
-
-<div style={{background:'#f3f4f6',borderRadius:'8px',padding:'48px 24px',textAlign:'center',color:'#9ca3af',marginBottom:'16px',border:'1px dashed #d1d5db'}}>📷 截图占位：マルチキーモード設定</div>
 
 マルチキーモードでは 1 つのチャンネルに複数の API キーを設定できます。システムが自動的にポーリングし、失敗したキーは自動的にスキップされ、回復後に再有効化されます。
 
