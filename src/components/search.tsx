@@ -40,7 +40,7 @@ function Header() {
         <p className="text-fd-muted-foreground text-xs">
           Powered by{' '}
           <a
-            href="https://client.gravitex.ai"
+            href="/zh/docs/api"
             target="_blank"
             rel="noreferrer noopener"
           >

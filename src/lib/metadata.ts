@@ -11,7 +11,7 @@ export function createMetadata(override: Metadata): Metadata {
     openGraph: {
       title: override.title ?? undefined,
       description: override.description ?? undefined,
-      url: 'https://client.gravitex.ai',
+      url: '/zh/docs/api',
       images: '/assets/logo.png',
       siteName: 'Gravitex AI',
       type: 'website',
