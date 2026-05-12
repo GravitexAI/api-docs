@@ -10,9 +10,7 @@
     "memoh",
     "fluent-read",
     "openclaw",
-    "cherry-studio",
     "claude-code",
-    "codex-cli",
-    "fluent-read"
+    "codex-cli"
   ]
 }
