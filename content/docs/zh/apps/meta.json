@@ -5,6 +5,10 @@
   "root": true,
   "pages": [
     "index",
+    "cherry-studio",
+    "deepchat",
+    "memoh",
+    "fluent-read",
     "openclaw",
     "cherry-studio",
     "claude-code",
