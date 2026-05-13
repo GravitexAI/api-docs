@@ -1,0 +1,320 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "列出素材组",
+    "version": "1.0.0",
+    "description": "列出当前用户的素材组。未传 `group_type` 时默认仅返回 `aigc` 虚拟素材组。\n\n详见《Seedance 2.0.md》「列出素材组」章节。\n"
+  },
+  "servers": [
+    {
+      "url": "https://api.gravitex.ai"
+    }
+  ],
+  "tags": [
+    {
+      "name": "视频（Videos）/Seedance 2.0格式"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "使用 Bearer Token 认证。\n格式: `Authorization: Bearer sk-xxxxxx`\n"
+      }
+    }
+  },
+  "paths": {
+    "/v1/asset-groups": {
+      "get": {
+        "tags": [
+          "视频（Videos）/Seedance 2.0格式"
+        ],
+        "summary": "列出素材组",
+        "description": "支持 `group_type=aigc|liveness_face|all` 过滤；查看真人组请显式传 `liveness_face` 或 `all`。\n",
+        "operationId": "listassetgroups",
+        "parameters": [
+          {
+            "name": "group_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "aigc",
+                "liveness_face",
+                "all"
+              ],
+              "default": "aigc"
+            },
+            "description": "按素材组类型过滤；默认 aigc"
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "素材组列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "groups": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "user_id": {
+                            "type": "integer"
+                          },
+                          "channel_id": {
+                            "type": "integer"
+                          },
+                          "group_id": {
+                            "type": "string"
+                          },
+                          "group_type": {
+                            "type": "string",
+                            "enum": [
+                              "aigc",
+                              "liveness_face"
+                            ]
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "project_name": {
+                            "type": "string"
+                          },
+                          "space_label": {
+                            "type": "string"
+                          },
+                          "asset_count": {
+                            "type": "integer"
+                          },
+                          "created_at": {
+                            "type": "integer"
+                          },
+                          "updated_at": {
+                            "type": "integer"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "id",
+                          "user_id",
+                          "channel_id",
+                          "group_id",
+                          "group_type",
+                          "name",
+                          "description",
+                          "project_name",
+                          "space_label",
+                          "asset_count",
+                          "created_at",
+                          "updated_at"
+                        ]
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "has_byteplus_channels": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "groups",
+                    "total"
+                  ],
+                  "x-apifox-orders": [
+                    "groups",
+                    "total",
+                    "has_byteplus_channels"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "错误信息"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "错误类型"
+                        },
+                        "param": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "相关参数路径"
+                        },
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "错误代码"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type",
+                        "param",
+                        "code"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未授权",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "余额不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求过于频繁",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游服务错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

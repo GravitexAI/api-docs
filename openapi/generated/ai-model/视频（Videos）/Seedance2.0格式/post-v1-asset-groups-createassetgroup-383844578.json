@@ -1,0 +1,298 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "创建素材组（虚拟 aigc）",
+    "version": "1.0.0",
+    "description": "创建虚拟素材组（`group_type` 固定为 `aigc`）。真人素材组 `liveness_face` 须走 `POST /v1/visual-validate/session`。\n\n详见《Seedance 2.0.md》「创建素材组」章节。\n"
+  },
+  "servers": [
+    {
+      "url": "https://api.gravitex.ai"
+    }
+  ],
+  "tags": [
+    {
+      "name": "视频（Videos）/Seedance 2.0格式"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "使用 Bearer Token 认证。\n格式: `Authorization: Bearer sk-xxxxxx`\n"
+      }
+    }
+  },
+  "paths": {
+    "/v1/asset-groups": {
+      "post": {
+        "tags": [
+          "视频（Videos）/Seedance 2.0格式"
+        ],
+        "summary": "创建素材组（虚拟 aigc）",
+        "description": "同一用户下虚拟素材组与真人素材组各最多 100 个，配额独立。\n",
+        "operationId": "createassetgroup",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "创建素材组请求体（与《Seedance 2.0.md》一致）",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "素材组名称"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "描述；省略或空串时网关用 API Key 所属用户的 username 兜底"
+                  },
+                  "channel_id": {
+                    "type": "integer",
+                    "description": "上游渠道 ID，省略则自动选择"
+                  },
+                  "group_type": {
+                    "type": "string",
+                    "description": "仅支持 aigc（默认）；liveness_face 不可在此创建",
+                    "enum": [
+                      "aigc"
+                    ],
+                    "default": "aigc"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "x-apifox-orders": [
+                  "name",
+                  "description",
+                  "channel_id",
+                  "group_type"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "group_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "channel_id": {
+                      "type": "integer"
+                    },
+                    "group_type": {
+                      "type": "string",
+                      "enum": [
+                        "aigc"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "group_id",
+                    "name",
+                    "group_type"
+                  ],
+                  "x-apifox-orders": [
+                    "group_id",
+                    "name",
+                    "description",
+                    "channel_id",
+                    "group_type"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "错误信息"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "错误类型"
+                        },
+                        "param": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "相关参数路径"
+                        },
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "错误代码"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type",
+                        "param",
+                        "code"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未授权",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "余额不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求过于频繁",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游服务错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

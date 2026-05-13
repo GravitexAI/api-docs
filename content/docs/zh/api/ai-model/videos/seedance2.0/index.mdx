@@ -1,0 +1,24 @@
+---
+title: Seedance 2.0 与素材库
+description: Seedance 2.0 视频生成与素材库相关 HTTP 接口索引。
+---
+
+## 视频生成
+
+- [创建视频生成任务](/zh/docs/api/ai-model/videos/seedance2.0/createvideogeneration) — `POST /v1/video/generations`
+- [查询任务状态](/zh/docs/api/ai-model/videos/seedance2.0/getvideogeneration) — `GET /v1/video/generations/{task_id}`
+
+## 素材库
+
+- [创建素材组](/zh/docs/api/ai-model/videos/seedance2.0/createassetgroup) — `POST /v1/asset-groups`
+- [列出素材组](/zh/docs/api/ai-model/videos/seedance2.0/listassetgroups) — `GET /v1/asset-groups`
+- [删除素材组](/zh/docs/api/ai-model/videos/seedance2.0/deleteassetgroup) — `DELETE /v1/asset-groups/{group_id}`
+- [创建素材](/zh/docs/api/ai-model/videos/seedance2.0/createasset) — `POST /v1/assets`
+- [列出素材](/zh/docs/api/ai-model/videos/seedance2.0/listassets) — `GET /v1/assets`
+- [查询单个素材](/zh/docs/api/ai-model/videos/seedance2.0/getasset) — `GET /v1/assets/{virtual_id}`
+- [删除素材](/zh/docs/api/ai-model/videos/seedance2.0/deleteasset) — `DELETE /v1/assets/{virtual_id}`
+
+## 真人素材组（H5 活体核验）
+
+- [发起核验会话](/zh/docs/api/ai-model/videos/seedance2.0/createvisualvalidatesession) — `POST /v1/visual-validate/session`
+- [核验结果回调（内部）](/zh/docs/api/ai-model/videos/seedance2.0/visualvalidateresult) — `POST /v1/visual-validate/result`

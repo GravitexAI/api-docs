@@ -1,0 +1,18 @@
+---
+title: 创建素材组（虚拟 aigc）
+full: true
+_openapi:
+  method: POST
+  toc: []
+  structuredData:
+    headings: []
+    contents:
+      - content: |
+          `POST /v1/asset-groups` 创建虚拟素材组；真人组须走 H5 活体核验接口。
+
+          详细说明见《Seedance 2.0.md》「创建素材组」章节。
+---
+
+`POST /v1/asset-groups` 创建虚拟素材组（`aigc`）。真人素材组 `liveness_face` 请使用 [发起核验会话](/zh/docs/api/ai-model/videos/seedance2.0/createvisualvalidatesession)。
+
+<APIPage document={"openapi/generated/ai-model/视频（Videos）/Seedance2.0格式/post-v1-asset-groups-createassetgroup-383844578.json"} operations={[{"path":"/v1/asset-groups","method":"post"}]} />

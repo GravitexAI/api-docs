@@ -1,0 +1,603 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "创建视频生成任务（Seedance 2.0）",
+    "version": "1.0.0",
+    "description": "Seedance 2.0 视频生成：通过 Gravitex AI 网关调用统一接口，支持文生视频、图生视频（首帧/首尾帧）、多模态参考及素材库 asset:// 引用。\n\n`content` 与 `prompt` 至少提供一个；推荐使用 `content` 数组。\n\n模型：`seedance-2-0`（支持 480p/720p/1080p）、`seedance-2-0-fast`（仅 480p/720p）。\n"
+  },
+  "servers": [
+    {
+      "url": "https://api.gravitex.ai"
+    }
+  ],
+  "tags": [
+    {
+      "name": "视频（Videos）/Seedance 2.0格式"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "使用 Bearer Token 认证。\n格式: `Authorization: Bearer sk-xxxxxx`\n"
+      }
+    }
+  },
+  "paths": {
+    "/v1/video/generations": {
+      "post": {
+        "tags": [
+          "视频（Videos）/Seedance 2.0格式"
+        ],
+        "summary": "创建视频生成任务（Seedance 2.0）",
+        "description": "提交 Seedance 2.0 视频生成任务，返回任务 ID 与初始状态。可通过 `GET /v1/video/generations/{task_id}` 轮询进度与结果。\n\n状态流转：`queued` → `in_progress` → `completed` / `failed`。\n",
+        "operationId": "createvideogeneration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Seedance 2.0 视频生成请求体（与《Seedance 2.0.md》创建任务章节一致）",
+                "properties": {
+                  "model": {
+                    "type": "string",
+                    "description": "模型 ID",
+                    "enum": [
+                      "seedance-2-0",
+                      "seedance-2-0-fast"
+                    ]
+                  },
+                  "content": {
+                    "type": "array",
+                    "description": "多模态内容数组；与 `prompt` 二选一至少其一",
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "title": "text",
+                          "description": "文本提示词（最多 1 条）",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "text"
+                              ]
+                            },
+                            "text": {
+                              "type": "string",
+                              "description": "文本描述"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "text"
+                          ],
+                          "x-apifox-orders": [
+                            "type",
+                            "text"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "image_url",
+                          "description": "图片输入；不指定 role 时默认首帧",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "image_url"
+                              ]
+                            },
+                            "image_url": {
+                              "type": "object",
+                              "properties": {
+                                "url": {
+                                  "type": "string",
+                                  "description": "图片 URL（含 https 或 asset://）"
+                                }
+                              },
+                              "required": [
+                                "url"
+                              ],
+                              "x-apifox-orders": [
+                                "url"
+                              ]
+                            },
+                            "role": {
+                              "type": "string",
+                              "description": "first_frame / last_frame / reference_image；省略则作首帧",
+                              "enum": [
+                                "first_frame",
+                                "last_frame",
+                                "reference_image"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "image_url"
+                          ],
+                          "x-apifox-orders": [
+                            "type",
+                            "image_url",
+                            "role"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "video_url",
+                          "description": "参考视频（最多 3 个）",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "video_url"
+                              ]
+                            },
+                            "video_url": {
+                              "type": "object",
+                              "properties": {
+                                "url": {
+                                  "type": "string",
+                                  "description": "视频 URL"
+                                }
+                              },
+                              "required": [
+                                "url"
+                              ],
+                              "x-apifox-orders": [
+                                "url"
+                              ]
+                            },
+                            "role": {
+                              "type": "string",
+                              "enum": [
+                                "reference_video"
+                              ],
+                              "description": "须为 reference_video"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "video_url",
+                            "role"
+                          ],
+                          "x-apifox-orders": [
+                            "type",
+                            "video_url",
+                            "role"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "title": "audio_url",
+                          "description": "参考音频（最多 3 段），需搭配图或视频",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "audio_url"
+                              ]
+                            },
+                            "audio_url": {
+                              "type": "object",
+                              "properties": {
+                                "url": {
+                                  "type": "string",
+                                  "description": "音频 URL"
+                                }
+                              },
+                              "required": [
+                                "url"
+                              ],
+                              "x-apifox-orders": [
+                                "url"
+                              ]
+                            },
+                            "role": {
+                              "type": "string",
+                              "enum": [
+                                "reference_audio"
+                              ],
+                              "description": "须为 reference_audio"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "audio_url",
+                            "role"
+                          ],
+                          "x-apifox-orders": [
+                            "type",
+                            "audio_url",
+                            "role"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "description": "纯文本提示词；与 `content` 二选一至少其一"
+                  },
+                  "duration": {
+                    "type": "integer",
+                    "description": "时长（秒）：`-1` 自动，或 `4`~`15`",
+                    "default": 5
+                  },
+                  "resolution": {
+                    "type": "string",
+                    "description": "输出分辨率；fast 模型不支持 1080p",
+                    "default": "720p",
+                    "enum": [
+                      "480p",
+                      "720p",
+                      "1080p"
+                    ]
+                  },
+                  "ratio": {
+                    "type": "string",
+                    "description": "画面比例；首帧图建议 adaptive",
+                    "default": "16:9",
+                    "enum": [
+                      "16:9",
+                      "9:16",
+                      "1:1",
+                      "4:3",
+                      "3:4",
+                      "21:9",
+                      "adaptive"
+                    ]
+                  },
+                  "generate_audio": {
+                    "type": "boolean",
+                    "description": "是否自动生成音频",
+                    "default": true
+                  },
+                  "watermark": {
+                    "type": "boolean",
+                    "description": "是否加水印",
+                    "default": false
+                  },
+                  "seed": {
+                    "type": "integer",
+                    "description": "随机种子；`-1` 表示随机",
+                    "default": -1
+                  }
+                },
+                "required": [
+                  "model"
+                ],
+                "x-apifox-orders": [
+                  "model",
+                  "content",
+                  "prompt",
+                  "duration",
+                  "resolution",
+                  "ratio",
+                  "generate_audio",
+                  "watermark",
+                  "seed"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功创建任务或返回当前任务快照",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "视频任务对象（提交后多为 queued；轮询时字段逐步补齐）",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "任务 ID"
+                    },
+                    "task_id": {
+                      "type": "string",
+                      "description": "与 id 一致的任务标识"
+                    },
+                    "object": {
+                      "type": "string",
+                      "description": "资源类型",
+                      "enum": [
+                        "video"
+                      ]
+                    },
+                    "model": {
+                      "type": "string",
+                      "description": "使用的模型 ID"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "任务状态",
+                      "enum": [
+                        "queued",
+                        "in_progress",
+                        "completed",
+                        "failed"
+                      ]
+                    },
+                    "progress": {
+                      "type": "integer",
+                      "description": "进度 0~100"
+                    },
+                    "created_at": {
+                      "type": "integer",
+                      "description": "创建时间（Unix 秒）"
+                    },
+                    "completed_at": {
+                      "type": "integer",
+                      "description": "完成时间（Unix 秒），未完成时可能省略"
+                    },
+                    "video_url": {
+                      "type": "string",
+                      "description": "视频地址（成功时常用）"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "与 video_url 同义的资源地址"
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "description": "扩展元数据（成功时常见）",
+                      "properties": {
+                        "url": {
+                          "type": "string"
+                        },
+                        "video_url": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "usage": {
+                          "type": "object",
+                          "properties": {
+                            "total_tokens": {
+                              "type": "integer",
+                              "description": "token 用量"
+                            }
+                          },
+                          "x-apifox-orders": [
+                            "total_tokens"
+                          ]
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "url",
+                        "video_url",
+                        "id",
+                        "status",
+                        "usage"
+                      ]
+                    },
+                    "error": {
+                      "type": "object",
+                      "description": "失败时的错误信息",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "code"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "id",
+                    "task_id",
+                    "object",
+                    "model",
+                    "status",
+                    "progress",
+                    "created_at",
+                    "completed_at",
+                    "video_url",
+                    "url",
+                    "metadata",
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "错误信息"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "错误类型"
+                        },
+                        "param": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "相关参数路径"
+                        },
+                        "code": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "错误代码（如 InvalidParameter）"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type",
+                        "param",
+                        "code"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未授权",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "错误信息"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "错误类型"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "余额不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "错误信息"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "错误类型"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求过于频繁",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "错误信息"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "错误类型"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "上游服务错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "错误信息"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "错误类型"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "message",
+                        "type"
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
