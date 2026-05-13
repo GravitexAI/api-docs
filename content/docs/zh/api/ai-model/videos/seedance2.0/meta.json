@@ -1,3 +1,16 @@
 {
-  "title": "Seedance2.0格式"
+  "title": "Seedance2.0格式",
+  "pages": [
+    "createvideogeneration",
+    "getvideogeneration",
+    "createassetgroup",
+    "listassetgroups",
+    "deleteassetgroup",
+    "createasset",
+    "listassets",
+    "getasset",
+    "deleteasset",
+    "createvisualvalidatesession",
+    "visualvalidateresult"
+  ]
 }

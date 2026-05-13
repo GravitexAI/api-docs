@@ -298,7 +298,7 @@ const specs = [
   {
     file: 'get-v1-video-generations-task_id-getvideogeneration-383844577.json',
     info: {
-      title: '查询视频生成任务状态（Seedance 2.0）',
+      title: '查询视频生成任务状态',
       version: '1.0.0',
       description:
         '轮询 `GET /v1/video/generations/{task_id}` 获取 Seedance 2.0 视频生成进度与结果。状态：`queued` → `in_progress` → `completed` / `failed`。建议每 5 秒轮询一次。\n\n详见《Seedance 2.0.md》「查询任务状态」章节。\n',
@@ -307,7 +307,7 @@ const specs = [
       '/v1/video/generations/{task_id}': {
         get: {
           tags: [tag],
-          summary: '查询视频生成任务状态（Seedance 2.0）',
+          summary: '查询视频生成任务状态',
           description:
             '根据任务 ID 返回当前快照；成功时包含 `video_url` / `url` 与 `metadata`。\n',
           operationId: 'getvideogeneration',
@@ -767,7 +767,7 @@ const specs = [
   {
     file: 'post-v1-visual-validate-session-createvisualvalidatesession-383844585.json',
     info: {
-      title: '发起 H5 活体核验（真人素材组）',
+      title: '发起 H5 真人核验（真人素材组）',
       version: '1.0.0',
       description:
         '创建真人素材组的第一步：返回 BytePlus H5 核验链接与网关签发的 `state`。用户完成核验后回调页会 `postMessage` 结果。\n\n详见《Seedance 2.0.md》「真人素材组：H5 活体核验」章节。\n',

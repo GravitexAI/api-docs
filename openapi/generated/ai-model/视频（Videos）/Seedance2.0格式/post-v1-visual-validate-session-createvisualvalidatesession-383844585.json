@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "发起 H5 活体核验（真人素材组）",
+    "title": "发起 H5 真人核验（真人素材组）",
     "version": "1.0.0",
     "description": "创建真人素材组的第一步：返回 BytePlus H5 核验链接与网关签发的 `state`。用户完成核验后回调页会 `postMessage` 结果。\n\n详见《Seedance 2.0.md》「真人素材组：H5 活体核验」章节。\n"
   },

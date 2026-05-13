@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "查询视频生成任务状态（Seedance 2.0）",
+    "title": "查询视频生成任务状态",
     "version": "1.0.0",
     "description": "轮询 `GET /v1/video/generations/{task_id}` 获取 Seedance 2.0 视频生成进度与结果。状态：`queued` → `in_progress` → `completed` / `failed`。建议每 5 秒轮询一次。\n\n详见《Seedance 2.0.md》「查询任务状态」章节。\n"
   },
@@ -30,7 +30,7 @@
         "tags": [
           "视频（Videos）/Seedance 2.0格式"
         ],
-        "summary": "查询视频生成任务状态（Seedance 2.0）",
+        "summary": "查询视频生成任务状态",
         "description": "根据任务 ID 返回当前快照；成功时包含 `video_url` / `url` 与 `metadata`。\n",
         "operationId": "getvideogeneration",
         "parameters": [

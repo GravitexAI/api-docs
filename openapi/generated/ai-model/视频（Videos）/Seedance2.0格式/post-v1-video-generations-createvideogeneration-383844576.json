@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "创建视频生成任务（Seedance 2.0）",
+    "title": "创建视频生成任务",
     "version": "1.0.0",
     "description": "Seedance 2.0 视频生成：通过 Gravitex AI 网关调用统一接口，支持文生视频、图生视频（首帧/首尾帧）、多模态参考及素材库 asset:// 引用。\n\n`content` 与 `prompt` 至少提供一个；推荐使用 `content` 数组。\n\n模型：`seedance-2-0`（支持 480p/720p/1080p）、`seedance-2-0-fast`（仅 480p/720p）。\n"
   },
@@ -30,7 +30,7 @@
         "tags": [
           "视频（Videos）/Seedance 2.0格式"
         ],
-        "summary": "创建视频生成任务（Seedance 2.0）",
+        "summary": "创建视频生成任务",
         "description": "提交 Seedance 2.0 视频生成任务，返回任务 ID 与初始状态。可通过 `GET /v1/video/generations/{task_id}` 轮询进度与结果。\n\n状态流转：`queued` → `in_progress` → `completed` / `failed`。\n",
         "operationId": "createvideogeneration",
         "requestBody": {
