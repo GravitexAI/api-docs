@@ -5,10 +5,11 @@
   "root": true,
   "pages": [
     "index",
+    "cc-switch",
     "cherry-studio",
     "deepchat",
-    "memoh",
     "fluent-read",
+    "memoh",
     "openclaw",
     "claude-code",
     "codex-cli"
