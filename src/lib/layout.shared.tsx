@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { ThemeSwitchWithVersion } from '@/components/theme-switch-with-version';
 import { i18n } from '@/lib/i18n';
 import Image from 'next/image';
 import type { LinkItemType } from 'fumadocs-ui/layouts/docs';
@@ -60,6 +61,9 @@ export function baseOptions(locale: string): BaseLayoutProps {
   return {
     i18n,
     searchToggle: { enabled: false },
+    themeSwitch: {
+      component: <ThemeSwitchWithVersion />,
+    },
     nav: {
       title: (
         <>
