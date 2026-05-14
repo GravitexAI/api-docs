@@ -10,7 +10,6 @@
     "listassets",
     "getasset",
     "deleteasset",
-    "createvisualvalidatesession",
-    "visualvalidateresult"
+    "createvisualvalidatesession"
   ]
 }
