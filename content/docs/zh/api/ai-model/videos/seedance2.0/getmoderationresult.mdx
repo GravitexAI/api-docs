@@ -1,0 +1,20 @@
+---
+title: 查询审核拦截原因
+full: true
+_openapi:
+  method: GET
+  toc: []
+  structuredData:
+    headings: []
+    contents:
+      - content: |
+          当 Seedance 2.0 任务失败且可能因内容安全/版权/公众人物/真人脸等策略被拦截时，可调用本接口获取上游具体分类（需渠道白名单）。
+
+          详细说明见《Seedance 2.0.md》「查询审核拦截原因」章节。
+---
+
+{/* Seedance 2.0 专用；与通用视频任务查询页面区分。 */}
+
+当 Seedance 2.0 任务 `status=failed` 且可能因审核策略被拦截时，可调用 `GET /v1/video/generations/moderation-result/{task_id}` 获取 `block_reasons` 明细（渠道需开通白名单，未开通返回 403）。
+
+<APIPage document={"openapi/generated/ai-model/视频（Videos）/Seedance2.0格式/get-v1-video-generations-moderation-result-task_id-getmoderationresult-383844587.json"} operations={[{"path":"/v1/video/generations/moderation-result/{task_id}","method":"get"}]} />

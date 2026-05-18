@@ -294,7 +294,130 @@ const groupItemSchema = {
   ],
 };
 
+const moderationBlockReasonSchema = {
+  type: 'object',
+  properties: {
+    label: {
+      type: 'string',
+      description: '拦截大类：Safety / Copyright / Celebrity / Deepfake',
+      enum: ['Safety', 'Copyright', 'Celebrity', 'Deepfake'],
+    },
+    sub_label: { type: 'string', description: '子分类' },
+    detail: { type: 'string', description: '自然语言描述' },
+  },
+  required: ['label', 'sub_label', 'detail'],
+  'x-apifox-orders': ['label', 'sub_label', 'detail'],
+};
+
+const error403 = {
+  description: '渠道未开通审核拦截原因查询（白名单）',
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'object',
+            properties: {
+              message: { type: 'string' },
+              type: { type: 'string', description: '如 channel_not_whitelisted' },
+            },
+            'x-apifox-orders': ['message', 'type'],
+          },
+        },
+        'x-apifox-orders': ['error'],
+      },
+    },
+  },
+};
+
+const error404 = {
+  description: '任务不存在或无可查拦截记录',
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'object',
+            properties: {
+              message: { type: 'string' },
+              type: { type: 'string', description: '如 not_found' },
+            },
+            'x-apifox-orders': ['message', 'type'],
+          },
+        },
+        'x-apifox-orders': ['error'],
+      },
+    },
+  },
+};
+
 const specs = [
+  {
+    file: 'get-v1-video-generations-moderation-result-task_id-getmoderationresult-383844587.json',
+    info: {
+      title: '查询审核拦截原因',
+      version: '1.0.0',
+      description:
+        '当 Seedance 2.0 任务 `status=failed` 且因内容安全/版权等原因被拦截时，可主动查询上游具体分类。需渠道白名单；未开通返回 403。\n\n详见《Seedance 2.0.md》「查询审核拦截原因」章节。\n',
+    },
+    paths: {
+      '/v1/video/generations/moderation-result/{task_id}': {
+        get: {
+          tags: [tag],
+          summary: '查询审核拦截原因',
+          description:
+            '仅 `seedance-2-0` / `seedance-2-0-fast` 的 **failed** 任务可查；创建后 14 天内有效。首次成功后结果会缓存（`cached: true`）。\n',
+          operationId: 'getmoderationresult',
+          parameters: [
+            {
+              name: 'task_id',
+              in: 'path',
+              required: true,
+              schema: { type: 'string' },
+              description: '失败任务的 task_id',
+            },
+          ],
+          security: [{ BearerAuth: [] }],
+          responses: {
+            200: {
+              description: '拦截原因列表',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      task_id: { type: 'string' },
+                      block_reasons: {
+                        type: 'array',
+                        items: moderationBlockReasonSchema,
+                      },
+                      cached: { type: 'boolean' },
+                      queried_at: { type: 'integer' },
+                    },
+                    required: ['task_id', 'block_reasons'],
+                    'x-apifox-orders': [
+                      'task_id',
+                      'block_reasons',
+                      'cached',
+                      'queried_at',
+                    ],
+                  },
+                },
+              },
+            },
+            400: error400,
+            401: error401,
+            403: error403,
+            404: error404,
+            429: error429,
+            502: error502,
+          },
+        },
+      },
+    },
+  },
   {
     file: 'get-v1-video-generations-task_id-getvideogeneration-383844577.json',
     info: {

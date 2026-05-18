@@ -3,6 +3,7 @@
   "pages": [
     "createvideogeneration",
     "getvideogeneration",
+    "getmoderationresult",
     "createassetgroup",
     "listassetgroups",
     "deleteassetgroup",

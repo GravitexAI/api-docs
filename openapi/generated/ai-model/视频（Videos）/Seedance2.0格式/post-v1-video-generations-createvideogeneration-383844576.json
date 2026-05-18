@@ -31,7 +31,7 @@
           "视频（Videos）/Seedance 2.0格式"
         ],
         "summary": "创建视频生成任务",
-        "description": "提交 Seedance 2.0 视频生成任务，返回任务 ID 与初始状态。可通过 `GET /v1/video/generations/{task_id}` 轮询进度与结果。\n\n状态流转：`queued` → `in_progress` → `completed` / `failed`。\n",
+        "description": "提交 Seedance 2.0 视频生成任务，返回任务 ID 与初始状态。可通过 `GET /v1/video/generations/{task_id}` 轮询进度与结果（建议每 5 秒）。\n\n状态流转：`queued` → `in_progress` → `completed` / `failed`。\n\n`asset://` 须按素材 `asset_type` 映射到 `image_url` / `video_url` / `audio_url`，不可全部塞进 `image_url`。提供 `reference_audio` 时建议 `generate_audio: false`。\n",
         "operationId": "createvideogeneration",
         "requestBody": {
           "required": true,
@@ -253,7 +253,7 @@
                   },
                   "generate_audio": {
                     "type": "boolean",
-                    "description": "是否自动生成音频",
+                    "description": "是否自动生成音频；提供 reference_audio 时建议设为 false",
                     "default": true
                   },
                   "watermark": {

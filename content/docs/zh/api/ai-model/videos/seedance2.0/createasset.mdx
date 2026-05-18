@@ -8,9 +8,11 @@ _openapi:
     headings: []
     contents:
       - content: |
-          `POST /v1/assets` 提交公网 https URL，支持 Image / Video / Audio。
+          `POST /v1/assets` 提交公网 https URL，支持 Image / Video / Audio。不支持 Base64 / Data URI / multipart 直传。
 
           详细说明见《Seedance 2.0.md》「创建素材」章节（格式与大小约束）。
 ---
+
+`POST /v1/assets` 仅接受 BytePlus 可拉取的公网 https URL；虚拟（`aigc`）与真人（`liveness_face`）素材组均支持三种 `asset_type`。
 
 <APIPage document={"openapi/generated/ai-model/视频（Videos）/Seedance2.0格式/post-v1-assets-createasset-383844581.json"} operations={[{"path":"/v1/assets","method":"post"}]} />

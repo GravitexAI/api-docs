@@ -8,13 +8,13 @@ _openapi:
     headings: []
     contents:
       - content: |
-          通过 `GET /v1/video/generations/{task_id}` 轮询 Seedance 2.0 任务进度与结果。
+          通过 `GET /v1/video/generations/{task_id}` 轮询 Seedance 2.0 任务进度与结果。建议每 5 秒查询一次。
+
+          状态：`queued` → `in_progress` → `completed` / `failed`。审核类失败可再调「查询审核拦截原因」接口。
 
           详细说明见《Seedance 2.0.md》「查询任务状态」章节。
 ---
 
-{/* Seedance 2.0 专用 OpenAPI 文档；与通用 getvideogeneration 页面区分。 */}
-
-通过 `GET /v1/video/generations/{task_id}` 轮询 Seedance 2.0 任务进度与结果。
+通过 `GET /v1/video/generations/{task_id}` 轮询 Seedance 2.0 任务进度与结果（建议间隔 5 秒）。成功时响应含 `video_url` / `url` 与 `metadata.usage` 等字段。
 
 <APIPage document={"openapi/generated/ai-model/视频（Videos）/Seedance2.0格式/get-v1-video-generations-task_id-getvideogeneration-383844577.json"} operations={[{"path":"/v1/video/generations/{task_id}","method":"get"}]} />

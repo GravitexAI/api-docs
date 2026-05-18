@@ -21,7 +21,7 @@ Seedance 2.0 是一款先进的 AI 视频生成模型，支持文生视频、图
 - [素材库 API](#素材库-api)
   - [接口总览](#接口总览)
   - [创建虚拟素材组（aigc）](#创建素材组)
-  - [真人素材组：H5 活体核验（liveness_face）](#真人素材组h5-活体核验)
+  - [真人素材组：H5 真人核验（liveness_face）](#真人素材组h5-真人核验)
   - [列出素材组](#列出素材组)
   - [删除素材组](#删除素材组)
   - [创建素材](#创建素材)
@@ -31,6 +31,7 @@ Seedance 2.0 是一款先进的 AI 视频生成模型，支持文生视频、图
   - [素材状态](#素材状态)
 - [参数参考](#参数参考)
 - [错误处理](#错误处理)
+- [查询审核拦截原因](#查询审核拦截原因)
 - [完整代码示例](#完整代码示例)
 - [常见问题](#常见问题)
 
@@ -228,7 +229,7 @@ queued → in_progress → completed / failed
 | `queued` | 任务已提交，排队中 |
 | `in_progress` | 正在生成 |
 | `completed` | 生成成功，`video_url` 字段可用 |
-| `failed` | 生成失败，查看 `error.message` 获取原因 |
+| `failed` | 生成失败，查看 `error.message` 获取原因；如果是 Seedance 2.0 被审核拦截，还可以调用 [查询审核拦截原因](#查询审核拦截原因) 拿到具体分类 |
 
 **建议轮询间隔**：每 5 秒查询一次，视频通常在 30~120 秒内生成完毕。
 
@@ -404,7 +405,7 @@ curl -X POST https://api.gravitex.ai/v1/video/generations \
 | 库类型 | `group_type` | 创建方式 | 典型用途 |
 |---|---|---|---|
 | 虚拟素材库（默认） | `aigc` | `POST /v1/asset-groups` 直接创建 | 任意人物 / 动物 / 风景 / 物品的图片、视频、音频 |
-| 真人素材库 | `liveness_face` | `POST /v1/visual-validate/session` H5 活体核验后创建 | 真人写真，**首次创建必须通过本人活体核验**；后续追加图/视/音不再校验人脸 |
+| 真人素材库 | `liveness_face` | `POST /v1/visual-validate/session` H5 真人核验后创建 | 真人写真，**首次创建必须通过本人真人核验**；后续追加图/视/音不再校验人脸 |
 
 **完整流程：**
 
@@ -427,7 +428,7 @@ curl -X POST https://api.gravitex.ai/v1/video/generations \
 | `Video` | mp4 / mov | ≤ 50 MB | 分辨率 480p / 720p；时长 2–15 秒；FPS 24–60；长宽比 0.4–2.5；宽高 300–6000 px；总像素 409600–927408 |
 | `Audio` | mp3 / wav | ≤ 15 MB | 时长 2–15 秒 |
 
-> 真人素材库（`liveness_face`）虽可上传图/视/音三类，但首次创建时仍需以**真人正脸图片**完成 H5 活体核验；后续追加视频/音频不会再触发人脸比对。
+> 真人素材库（`liveness_face`）虽可上传图/视/音三类，但首次创建时仍需以**真人正脸图片**完成 H5 真人核验；后续追加视频/音频不会再触发人脸比对。
 
 #### 步骤 1：创建素材组（首次使用时执行一次）
 
@@ -546,7 +547,7 @@ curl -X POST https://api.gravitex.ai/v1/video/generations \
 | `GET` | `/v1/assets` | 列出素材，支持 `?group_id=`、`?group_type=aigc\|liveness_face\|all` 过滤；**未指定 `group_type` 时默认仅返回 `aigc` 类素材** |
 | `GET` | `/v1/assets/{virtual_id}` | 查询单个素材，自动刷新上游状态 |
 | `DELETE` | `/v1/assets/{virtual_id}` | 删除素材 |
-| `POST` | `/v1/visual-validate/session` | 真人素材组：发起 H5 活体核验 |
+| `POST` | `/v1/visual-validate/session` | 真人素材组：发起 H5 真人核验 |
 | `POST` | `/v1/visual-validate/result` | 真人素材组：H5 回调内部使用，业务侧无需直接调用 |
 
 ---
@@ -562,7 +563,7 @@ curl -X POST https://api.gravitex.ai/v1/video/generations \
 | `channel_id` | integer | 否 | 指定上游渠道 ID，省略则自动选择 |
 | `group_type` | string | 否 | `aigc`（默认）。**`liveness_face` 不能在此创建**，需走 `POST /v1/visual-validate/session` |
 
-**限额**：同一个用户下，**虚拟素材组（`aigc`）与真人素材组（`liveness_face`）各最多 100 个**，两类配额相互独立、不共用。例如用户已经创建了 100 个虚拟素材组，仍可继续通过 H5 活体核验创建至多 100 个真人素材组。
+**限额**：同一个用户下，**虚拟素材组（`aigc`）与真人素材组（`liveness_face`）各最多 100 个**，两类配额相互独立、不共用。例如用户已经创建了 100 个虚拟素材组，仍可继续通过 H5 真人核验创建至多 100 个真人素材组。
 
 ```bash
 curl -X POST https://api.gravitex.ai/v1/asset-groups \
@@ -592,9 +593,9 @@ curl -X POST https://api.gravitex.ai/v1/asset-groups \
 
 ---
 
-### 真人素材组：H5 活体核验
+### 真人素材组：H5 真人核验
 
-真人素材库不能直接通过 `POST /v1/asset-groups` 创建——必须先在 BytePlus H5 页面完成真人活体核验。
+真人素材库不能直接通过 `POST /v1/asset-groups` 创建——必须先在 BytePlus H5 页面完成真人真人核验。
 
 **两步流程：**
 
@@ -639,7 +640,7 @@ curl -X POST https://api.gravitex.ai/v1/visual-validate/session \
 
 | 字段 | 说明 |
 |---|---|
-| `h5_link` | BytePlus 活体核验 H5 页面 URL；网关已强制附加 `lang=zh-CN&lng=zh` 以默认显示简体中文 |
+| `h5_link` | BytePlus 真人核验 H5 页面 URL；网关已强制附加 `lang=zh-CN&lng=zh` 以默认显示简体中文 |
 | `state` | 网关签发的 HMAC `state` 令牌（HMAC-SHA256），已绑定 `user/channel/group_name/byted_token`，回调页自动用它换取结果 |
 | `byted_token` | 火山方舟下发的本次核验唯一凭据；回调页校验时也会用它和 `state` 内的值比对 |
 | `expires_in` | **`state` 令牌的有效期（秒）**，固定 `900`（15 分钟）。**注意：这并不是 H5 页面本身的寿命**——BytePlus 的 H5 链接只在约 120 秒内有效，超时后 `byted_token` 会被火山作废，必须重新调用本接口拿新链接 |
@@ -670,7 +671,7 @@ curl -X POST https://api.gravitex.ai/v1/visual-validate/session \
   "type": "gravitex-asset-validate-result",
   "ok": false,
   "result_code": "10003",
-  "error": "活体核验未通过：人脸与底图不匹配"
+  "error": "真人核验未通过：人脸与底图不匹配"
 }
 ```
 
@@ -1103,6 +1104,112 @@ curl -X DELETE https://api.gravitex.ai/v1/assets/asset-20260508120145-pqwhc \
 
 ---
 
+## 查询审核拦截原因
+
+当 Seedance 2.0 任务因为**内容安全 / 版权 / 公众人物 / 真人脸**等审核策略被拦截时，`GET /v1/video/generations/{task_id}` 只会告诉你 `status: failed`，错误信息比较笼统。可以使用本接口主动查询上游具体的拦截分类与子原因。
+
+> ⚠️ **本接口默认关闭**——上游 BytePlus 要求**白名单授权**才能调用。请联系火山方舟商务申请，再让平台管理员在对应渠道的「BytePlus 素材库配置」里勾选「启用审核拦截原因查询」。未开通时调用会返回 `403 channel_not_whitelisted`。
+
+### 限制
+
+| 限制 | 说明 |
+|---|---|
+| 模型范围 | 仅 `seedance-2-0` / `seedance-2-0-fast` 失败任务可查 |
+| 时间窗口 | 任务创建后 **14 天内**可查；超时返回 `400 query_window_expired` |
+| 任务状态 | 仅 `failed` 任务有意义；其他状态返回 `400 invalid_task_status` |
+| 任务归属 | 只能查询自己 token 创建的任务（按 `user_id + task_id` 限定） |
+| 频率限制 | 每个渠道 **10 QPM**（与上游 QPM 一致）；超限返回 `429 rate_limited` |
+| 自动缓存 | 首次查询成功后结果会持久化到任务记录里，重复查询不消耗 QPM，响应中带 `"cached": true` |
+
+### 请求
+
+**GET** `https://api.gravitex.ai/v1/video/generations/moderation-result/{task_id}`
+
+```bash
+curl https://api.gravitex.ai/v1/video/generations/moderation-result/cgt-20260430135030-xxxxx \
+  -H "Authorization: Bearer sk-your_token_key"
+```
+
+### 响应 — 拦截原因列表
+
+```json
+{
+  "task_id": "cgt-20260430135030-xxxxx",
+  "block_reasons": [
+    {
+      "label": "Celebrity",
+      "sub_label": "Celebrity",
+      "detail": "Potentially contains Public Figures."
+    },
+    {
+      "label": "Copyright",
+      "sub_label": "IP",
+      "detail": "Potential copyright restriction. Potentially related content: Spider-Man: Homecoming-Peter Parker"
+    }
+  ],
+  "cached": false,
+  "queried_at": 1715140800
+}
+```
+
+### `block_reasons` 字段说明（对齐火山官方枚举）
+
+| 字段 | 说明 |
+|---|---|
+| `label` | 拦截大类，枚举值：`Safety`（内容安全）/ `Copyright`（版权）/ `Celebrity`（公众人物）/ `Deepfake`（真人脸） |
+| `sub_label` | 子分类：`Safety` 大类下为 `Safety`；`Copyright` 下为 `IP` / `Other`；`Celebrity` 下为 `Celebrity`；`Deepfake` 下为 `RealHuman` |
+| `detail` | 自然语言描述，可能包含命中的具体 IP / 公众人物名称（如 "Spider-Man: Homecoming-Peter Parker"） |
+
+### 错误响应
+
+| HTTP | `error.type` | 含义 |
+|------|---|---|
+| `400` | `invalid_request` | 缺少 `task_id` |
+| `400` | `invalid_task_status` | 任务不是 `failed` 状态，无拦截原因可查 |
+| `400` | `unsupported_model` | 任务不属于 seedance-2-0 系列 |
+| `400` | `query_window_expired` | 任务已超出 14 天可查询窗口 |
+| `403` | `channel_not_whitelisted` | 渠道未开启审核拦截原因查询开关 |
+| `404` | `not_found` | 任务不存在，或上游返回 `NotFound.Id`（任务未被审核拦截 / ID 无效 / 渠道未真正进入白名单） |
+| `429` | `rate_limited` | 当前渠道触发 10 QPM 限流，请稍后重试 |
+| `502` | `upstream_error` | 上游返回非 404 的错误，详细原因在 `error.message` 中透传 |
+
+错误体格式与其他接口一致：
+
+```json
+{
+  "error": {
+    "message": "moderation query is not enabled on this channel; please contact admin to apply for BytePlus whitelist activation",
+    "type": "channel_not_whitelisted"
+  }
+}
+```
+
+### 典型集成流程
+
+```python
+import requests
+
+def explain_failed_task(task_id: str) -> str:
+    """轮询拿到 status=failed 后再调本接口，把人类可读的拦截原因拼出来"""
+    resp = requests.get(
+        f"{BASE_URL}/v1/video/generations/moderation-result/{task_id}",
+        headers=HEADERS,
+    )
+    if resp.status_code == 403:
+        return "渠道未开通审核拦截原因查询，请联系管理员"
+    if resp.status_code == 404:
+        return "未查到拦截记录（可能不是被审核拦截，或已超 14 天）"
+    resp.raise_for_status()
+    data = resp.json()
+    if not data.get("block_reasons"):
+        return "任务失败但未被审核拦截"
+    return "；".join(
+        f"{r['label']}/{r['sub_label']}: {r['detail']}" for r in data["block_reasons"]
+    )
+```
+
+---
+
 ## 完整代码示例
 
 ### Python
@@ -1396,7 +1503,7 @@ done
 
 ### Q: 真人素材库（liveness_face）能传视频或音频吗？
 
-可以。**首次创建素材组时**仍需通过 `POST /v1/visual-validate/session` 走 H5 真人活体核验（核验只看脸部图片）；**核验通过后向该组追加素材**，与虚拟素材库完全一致：`POST /v1/assets` 同时支持 `Image` / `Video` / `Audio`，不会再触发人脸比对。
+可以。**首次创建素材组时**仍需通过 `POST /v1/visual-validate/session` 走 H5 真人核验（核验只看脸部图片）；**核验通过后向该组追加素材**，与虚拟素材库完全一致：`POST /v1/assets` 同时支持 `Image` / `Video` / `Audio`，不会再触发人脸比对。
 
 ### Q: `generate_audio` 和 `reference_audio` 如何配合？
 
