@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { appendTimeToInternalHref } from '@/lib/append-time-query';
 import { getLocalePath } from '@/lib/i18n';
 
 interface FooterProps {
@@ -218,7 +219,11 @@ export function Footer({ lang }: FooterProps) {
                 <Component
                   key={social.name}
                   href={
-                    isExternal ? social.href : getLocalePath(lang, social.href)
+                    isExternal
+                      ? social.href
+                      : appendTimeToInternalHref(
+                          getLocalePath(lang, social.href),
+                        )
                   }
                   {...(isExternal && {
                     target: '_blank',

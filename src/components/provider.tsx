@@ -1,26 +1,32 @@
 'use client';
 
-import { RootProvider } from 'fumadocs-ui/provider/next';
-import { Suspense, type ReactNode } from 'react';
-import { EnsureTimeQueryParam } from './ensure-time-query';
-import { GlobalBanner } from './global-banner';
+import { RootProvider as BaseProvider } from 'fumadocs-ui/provider/base';
+import {
+  FrameworkProvider,
+  type Framework,
+} from 'fumadocs-core/framework';
+import Image from 'next/image';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+import type { ReactNode } from 'react';
+import TimeLink from '@/components/time-link';
 
 export function Provider({
   children,
   i18n,
-  lang,
 }: {
   children: ReactNode;
-  i18n: Parameters<typeof RootProvider>[0]['i18n'];
+  i18n: Parameters<typeof BaseProvider>[0]['i18n'];
   lang?: string;
 }) {
   return (
-    <RootProvider i18n={i18n}>
-      <Suspense fallback={null}>
-        <EnsureTimeQueryParam />
-      </Suspense>
-      {/* <GlobalBanner lang={lang} /> */}
-      {children}
-    </RootProvider>
+    <FrameworkProvider
+      Link={TimeLink}
+      Image={Image as NonNullable<Framework['Image']>}
+      usePathname={usePathname}
+      useRouter={useRouter}
+      useParams={useParams}
+    >
+      <BaseProvider i18n={i18n}>{children}</BaseProvider>
+    </FrameworkProvider>
   );
 }

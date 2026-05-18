@@ -4,9 +4,16 @@ import { i18n } from '@/lib/i18n';
 
 const i18nMiddleware = createI18nMiddleware(i18n);
 
-/** 无 `time` 查询参数时重定向到带当前时间戳的同一 URL（用于缓存穿透等） */
-function redirectWithTime(request: NextRequest): NextResponse | null {
-  if (request.nextUrl.searchParams.has('time')) {
+function isHomePath(pathname: string): boolean {
+  return i18n.languages.some(
+    (lang) => pathname === `/${lang}` || pathname === `/${lang}/`,
+  );
+}
+
+/** 首页直开无 `time` 时重定向补参（仅 /{lang}，不含文档等子路径） */
+function redirectHomeWithTime(request: NextRequest): NextResponse | null {
+  const { pathname, searchParams } = request.nextUrl;
+  if (!isHomePath(pathname) || searchParams.has('time')) {
     return null;
   }
 
@@ -15,13 +22,10 @@ function redirectWithTime(request: NextRequest): NextResponse | null {
   return NextResponse.redirect(url);
 }
 
-export default function middleware(
-  request: NextRequest,
-  event: NextFetchEvent,
-) {
-  const timeRedirect = redirectWithTime(request);
-  if (timeRedirect) {
-    return timeRedirect;
+export default function middleware(request: NextRequest, event: NextFetchEvent) {
+  const homeTimeRedirect = redirectHomeWithTime(request);
+  if (homeTimeRedirect) {
+    return homeTimeRedirect;
   }
 
   return i18nMiddleware(request, event);

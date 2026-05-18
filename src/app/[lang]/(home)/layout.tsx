@@ -1,6 +1,8 @@
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import { baseOptions, linkItems } from '@/lib/layout.shared';
+import { EnsureHomeTimeQuery } from '@/components/ensure-home-time-query';
 import { Footer } from '@/components/footer';
+import { Suspense } from 'react';
 import {
   Rocket,
   Download,
@@ -8,6 +10,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { getLocalePath } from '@/lib/i18n';
+import { appendTimeToInternalHref } from '@/lib/append-time-query';
 
 // Navigation items configuration
 const NAV_ITEMS = [
@@ -72,7 +75,7 @@ const buildNavItems = (lang: string, docsUrl: string) => {
   return NAV_ITEMS.map(({ key, icon: Icon, path }) => ({
     text: texts[key].text,
     desc: texts[key].desc,
-    url: `${docsUrl}${path}`,
+    url: appendTimeToInternalHref(`${docsUrl}${path}`),
     Icon,
   }));
 };
@@ -91,6 +94,9 @@ export default async function Layout({
 
   return (
     <div className="flex min-h-screen flex-col">
+      <Suspense fallback={null}>
+        <EnsureHomeTimeQuery />
+      </Suspense>
       <HomeLayout
         {...baseOptions(lang)}
         links={[
@@ -110,7 +116,7 @@ export default async function Layout({
             type: 'main',
             on: 'nav',
             text: texts.title.text,
-            url: docsUrl,
+            url: appendTimeToInternalHref(docsUrl),
           },
           ...linkItems,
         ]}

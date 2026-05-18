@@ -1,6 +1,7 @@
 import { BookOpen } from 'lucide-react';
 import { Hero } from './page.client';
 import { i18n } from '@/lib/i18n';
+import { appendTimeToInternalHref } from '@/lib/append-time-query';
 import Image from 'next/image';
 
 const contentMap: Record<
@@ -118,7 +119,7 @@ export default async function Page({
           </h1>
           <div className="flex w-fit flex-row flex-wrap items-center justify-center gap-4">
             <a
-              href="/zh/docs/api"
+              href={appendTimeToInternalHref('/zh/docs/api')}
               className="bg-brand text-brand-foreground hover:bg-brand-200 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-medium tracking-tight transition-colors max-sm:text-sm"
             >
               <BookOpen className="size-4" />

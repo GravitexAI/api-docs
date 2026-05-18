@@ -13,6 +13,7 @@ import { Loader2, MessageCircleIcon, RefreshCw, Send, X } from 'lucide-react';
 import { cn } from '../lib/cn';
 import { buttonVariants } from './ui/button';
 import Link from 'fumadocs-core/link';
+import { InternalTimeLink } from '@/components/internal-time-link';
 import { type UIMessage, useChat, type UseChatHelpers } from '@ai-sdk/react';
 import type { ProvideLinksToolSchema } from '../lib/inkeep-qa-schema';
 import type { z } from 'zod';
@@ -39,13 +40,13 @@ function Header() {
         <p className="mb-2 text-sm font-medium">Ask AI</p>
         <p className="text-fd-muted-foreground text-xs">
           Powered by{' '}
-          <a
+          <InternalTimeLink
             href="/zh/docs/api"
             target="_blank"
             rel="noreferrer noopener"
           >
             Gravitex AI
-          </a>
+          </InternalTimeLink>
         </p>
       </div>
       <button
