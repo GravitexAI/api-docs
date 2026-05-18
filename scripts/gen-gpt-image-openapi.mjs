@@ -1,5 +1,5 @@
 /**
- * Generator: gpt-image.md → per-operation OpenAPI JSON (Gpt-Image 格式目录).
+ * Generator: gpt-image.md → per-operation OpenAPI JSON (GPT-Image-OpenAI 格式目录).
  */
 import fs from 'fs';
 import path from 'path';
@@ -8,10 +8,10 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.join(
   __dirname,
-  '../openapi/generated/ai-model/图像（Images）/Gpt-Image格式',
+  '../openapi/generated/ai-model/图像（Images）/GPT-Image-OpenAI格式',
 );
 
-const tag = '图像（Images）/Gpt-Image格式';
+const tag = '图像（Images）/GPT-Image-OpenAI格式';
 
 const securitySchemes = {
   BearerAuth: {

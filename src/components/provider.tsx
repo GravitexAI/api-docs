@@ -1,7 +1,8 @@
 'use client';
 
 import { RootProvider } from 'fumadocs-ui/provider/next';
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
+import { EnsureTimeQueryParam } from './ensure-time-query';
 import { GlobalBanner } from './global-banner';
 
 export function Provider({
@@ -15,6 +16,9 @@ export function Provider({
 }) {
   return (
     <RootProvider i18n={i18n}>
+      <Suspense fallback={null}>
+        <EnsureTimeQueryParam />
+      </Suspense>
       {/* <GlobalBanner lang={lang} /> */}
       {children}
     </RootProvider>

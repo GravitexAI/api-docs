@@ -12,7 +12,7 @@
   ],
   "tags": [
     {
-      "name": "图像（Images）/Gpt-Image格式"
+      "name": "图像（Images）/GPT-Image-OpenAI格式"
     }
   ],
   "components": {
@@ -28,7 +28,7 @@
     "/v1/images/generations": {
       "post": {
         "tags": [
-          "图像（Images）/Gpt-Image格式"
+          "图像（Images）/GPT-Image-OpenAI格式"
         ],
         "summary": "GPT-Image-2 图像生成",
         "description": "文生图：仅 `model` + `prompt`（及可选 `size`/`quality`/`n`）。\n\n图生图：额外传 `image`（URL 或 base64 data URI，可数组多图融合）。可选 `input_fidelity`。\n\n响应始终为 `data[].b64_json`，不支持 `response_format=url`。\n",

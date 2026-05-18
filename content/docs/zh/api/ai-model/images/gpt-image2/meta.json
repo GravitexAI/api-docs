@@ -1,5 +1,5 @@
 {
-  "title": "Gpt-Image格式",
+  "title": "GPT-Image-OpenAI格式",
   "pages": [
     "createimagegeneration",
     "createimageedit"

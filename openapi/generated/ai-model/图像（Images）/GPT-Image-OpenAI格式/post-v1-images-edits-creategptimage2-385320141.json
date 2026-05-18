@@ -12,7 +12,7 @@
   ],
   "tags": [
     {
-      "name": "图像（Images）/Gpt-Image格式"
+      "name": "图像（Images）/GPT-Image-OpenAI格式"
     }
   ],
   "components": {
@@ -28,7 +28,7 @@
     "/v1/images/edits": {
       "post": {
         "tags": [
-          "图像（Images）/Gpt-Image格式"
+          "图像（Images）/GPT-Image-OpenAI格式"
         ],
         "summary": "GPT-Image-2 图像编辑",
         "description": "JSON：与 generations 图生图相同字段。\n\nmultipart：使用 `image[]` 上传文件（单张或多张），配合 `model`、`prompt`、`size`、`quality`、`n` 等表单字段。\n",

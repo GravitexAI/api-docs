@@ -6,7 +6,7 @@ import { ThemeToggle } from 'fumadocs-ui/components/layout/theme-toggle';
  * 文档站展示版本：`version：` + 年月日(YYYYMMDD) + 自增序号（同日多次发版则递增末几位）。
  * 发版前请按规则更新本常量。
  */
-export const DOC_SITE_VERSION = '2026051401';
+export const DOC_SITE_VERSION = '2026051801';
 
 /**
  * 主题切换左侧版本文案（与 fumadocs DocsLayout / HomeLayout 的 themeSwitch.component 对接）。
