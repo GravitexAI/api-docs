@@ -1,0 +1,21 @@
+---
+title: 图生图 / 编辑
+full: true
+_openapi:
+  method: POST
+  toc: []
+  structuredData:
+    headings: []
+    contents:
+      - content: |
+          `POST /v1/images/edits` 为标准 OpenAI 图像编辑端点，支持：
+
+          - **JSON**：`image` 为 URL 或 base64（与 generations 图生图参数一致）
+          - **multipart/form-data**：使用 `image[]` 直传文件（单张或多张）
+
+          详见《gpt-image.md》「图生图（edits 端点）」章节。
+---
+
+`POST /v1/images/edits` 适用于习惯 OpenAI edits 协议的集成方。JSON 与 multipart 两种 `Content-Type` 均支持 `gpt-image-2`，响应格式与 generations 一致。
+
+<APIPage document={"openapi/generated/ai-model/图像（Images）/Gpt-Image格式/post-v1-images-edits-creategptimage2-385320141.json"} operations={[{"path":"/v1/images/edits","method":"post"}]} />

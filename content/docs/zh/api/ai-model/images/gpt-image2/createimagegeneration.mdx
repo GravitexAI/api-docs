@@ -1,0 +1,21 @@
+---
+title: 文生图 / 图生图
+full: true
+_openapi:
+  method: POST
+  toc: []
+  structuredData:
+    headings: []
+    contents:
+      - content: |
+          **推荐端点**：`POST /v1/images/generations` 统一处理文生图与图生图。
+
+          - 文生图：仅 `model`（`gpt-image-2`）+ `prompt`
+          - 图生图：额外传 `image`（URL 或 base64 data URI，可字符串或数组）
+
+          详见《gpt-image.md》「文生图」「图生图（推荐方式：通过 generations 端点）」章节。
+---
+
+`POST /v1/images/generations` 为 GPT-Image-2 的**推荐入口**：无 `image` 时文生图；携带 `image` 时自动进入图生图流程。响应固定为 Base64（`b64_json`），并返回 `usage` token 统计。
+
+<APIPage document={"openapi/generated/ai-model/图像（Images）/Gpt-Image格式/post-v1-images-generations-creategptimage2-385320140.json"} operations={[{"path":"/v1/images/generations","method":"post"}]} />
