@@ -14,6 +14,8 @@
     "translate:all": "bun scripts/translate-docs.ts",
     "translate:force": "bun run translate",
     "generate:openapi:schemas": "bun scripts/generate-openapi-from-http.ts",
+    "generate:seedance20": "node scripts/gen-seedance20-openapi.mjs",
+    "generate:gptimage2": "node scripts/gen-gpt-image-openapi.mjs",
     "generate:openapi": "bun scripts/generate-openapi-from-http.ts && bun scripts/generate-openapi-docs.ts"
   },
   "dependencies": {
