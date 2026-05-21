@@ -2,6 +2,7 @@ import { docs } from '@/.source';
 import { type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 import { openapiPlugin } from 'fumadocs-openapi/server';
+import { expandAPIPagesInMarkdown } from '@/lib/expand-api-pages';
 import { i18n } from '@/lib/i18n';
 
 export const source = loader({
@@ -25,8 +26,9 @@ export function getPageImage(page: InferPageType<typeof source>) {
 
 export async function getLLMText(page: InferPageType<typeof source>) {
   const processed = await page.data.getText('processed');
+  const expanded = await expandAPIPagesInMarkdown(processed);
 
   return `# ${page.data.title}
 
-${processed}`;
+${expanded}`;
 }
