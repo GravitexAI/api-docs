@@ -101,7 +101,7 @@ In "Top-up Methods", you can configure according to the following structure:
 - **type**: Channel identifier, used for backend routing and order placement.
   - `stripe` → Uses Stripe gateway.
   - Others (e.g., `alipay`, `wxpay`, `custom1`, etc.) → Uses EPay-style gateway, and passes this value as a channel parameter.
-  - For detailed logic, see the backend controller [controller/topup.go](https://github.com/QuantumNous/new-api/blob/main/controller/topup.go).
+  - For detailed logic, see the backend controller [controller/topup.go](https://github.com/QuantumNous/gravitex-api/blob/main/controller/topup.go).
 - **min_topup**: Minimum top-up amount (unit consistent with page currency). If the entered amount is less than this value, the page will prompt "The minimum top-up amount for this payment method is X" and restrict payment initiation; the backend will also perform validation.
 - **Order**: Renders from left to right according to array order.
 
@@ -134,7 +134,7 @@ Set discounts corresponding to different top-up amounts, where the key is the to
 - **Key**: Top-up amount (string format).
 - **Value**: Discount rate (a decimal between 0-1, e.g., 0.95 means 95% of the price, i.e., a 5% discount).
 - The system will automatically calculate the actual payment amount and savings based on the configuration.
-- For detailed implementation logic, see the backend controller [controller/topup.go](https://github.com/QuantumNous/new-api/blob/main/controller/topup.go).
+- For detailed implementation logic, see the backend controller [controller/topup.go](https://github.com/QuantumNous/gravitex-api/blob/main/controller/topup.go).
 
 <Callout type="info">
   Top-up discounts can incentivize users to top up larger amounts at once, increasing user stickiness.
@@ -225,7 +225,7 @@ Quota Consumption = (Input Token Count + Output Token Count × Completion Ratio)
 Quota Consumption = Model Fixed Price × Group Ratio × Quota Unit (500,000)
 ```
 
-#### Audio Models (Special handling, automatically processed internally by new-api)
+#### Audio Models (Special handling, automatically processed internally by gravitex-api)
 
 ```
 Quota Consumption = (Text Input Token + Text Output Token × Completion Ratio + Audio Input Token × Audio Ratio + Audio Output Token × Audio Ratio × Audio Completion Ratio) × Model Ratio × Group Ratio

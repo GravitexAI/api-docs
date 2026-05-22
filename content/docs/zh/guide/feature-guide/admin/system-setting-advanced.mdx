@@ -101,7 +101,7 @@ Stripe 是国际信用卡支付平台。
 - **type**：通道标识，用于后端路由与下单
   - `stripe` → 走 Stripe 网关
   - 其他（如 `alipay`、`wxpay`、`custom1` 等）→ 走易支付风格网关，并将该值作为渠道参数透传
-  - 详细逻辑见后端控制器 [controller/topup.go](https://github.com/QuantumNous/new-api/blob/main/controller/topup.go)
+  - 详细逻辑见后端控制器 [controller/topup.go](https://github.com/QuantumNous/gravitex-api/blob/main/controller/topup.go)
 - **min_topup**：最低充值金额（单位与页面货币一致）。当输入金额小于该值时，页面会提示"此支付方式最低充值金额为 X"，并限制发起支付；后端也会进行校验
 - **排序**：按数组顺序从左到右渲染
 
@@ -134,7 +134,7 @@ Stripe 是国际信用卡支付平台。
 - **键**：充值金额（字符串格式）
 - **值**：折扣率（0-1之间的小数，如 0.95 表示 95% 价格，即 5% 折扣）
 - 系统会根据配置自动计算实付金额和节省金额
-- 详细实现逻辑见后端控制器 [controller/topup.go](https://github.com/QuantumNous/new-api/blob/main/controller/topup.go)
+- 详细实现逻辑见后端控制器 [controller/topup.go](https://github.com/QuantumNous/gravitex-api/blob/main/controller/topup.go)
 
 <Callout type="info">
   充值折扣可以激励用户一次性充值更多金额，提高用户粘性
@@ -225,7 +225,7 @@ Gravitex API 使用三层倍率体系来计算用户的配额消耗：
 配额消耗 = 模型固定价格 × 分组倍率 × 配额单位(500,000)
 ```
 
-#### 音频模型（特殊处理，new-api内部自动处理）
+#### 音频模型（特殊处理，gravitex-api内部自动处理）
 
 ```
 配额消耗 = (文本输入token + 文本输出token × 补全倍率 + 音频输入token × 音频倍率 + 音频输出token × 音频倍率 × 音频补全倍率) × 模型倍率 × 分组倍率

@@ -1,17 +1,17 @@
 ---
-title: newapi-admin (Coming Soon)
-description: newapi-admin is the official Gravitex API admin-level Skill plugin, enabling channel management, user management, system configuration, log queries and more directly from Claude Code, Cursor, Windsurf and other AI editors. Currently under development.
+title: gravitexapi-admin (Coming Soon)
+description: gravitexapi-admin is the official Gravitex API admin-level Skill plugin, enabling channel management, user management, system configuration, log queries and more directly from Claude Code, Cursor, Windsurf and other AI editors. Currently under development.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
 <Callout type="warn" title="Under Development — Coming Soon">
-  **newapi-admin** is currently under development and has not been released yet. Below is a preview of planned features. This page will be updated with full documentation upon release.
+  **gravitexapi-admin** is currently under development and has not been released yet. Below is a preview of planned features. This page will be updated with full documentation upon release.
 </Callout>
 
 ## Introduction
 
-**newapi-admin** is a Skill plugin designed for Gravitex API administrators. Unlike the user-level [newapi](/en/docs/skills/newapi) Skill, newapi-admin focuses on **admin operations**, allowing site administrators to perform daily management tasks from within their AI editor using natural language commands — no need to log into the admin dashboard.
+**gravitexapi-admin** is a Skill plugin designed for Gravitex API administrators. Unlike the user-level [gravitexapi](/en/docs/skills/gravitexapi) Skill, gravitexapi-admin focuses on **admin operations**, allowing site administrators to perform daily management tasks from within their AI editor using natural language commands — no need to log into the admin dashboard.
 
 ## Planned Features
 
@@ -19,50 +19,50 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 | Command (Planned) | Description |
 |-------------------|-------------|
-| `/newapi-admin channels` | List all channels and their status |
-| `/newapi-admin channel-add` | Add new channels (OpenAI, Claude, Gemini, Azure, etc.) |
-| `/newapi-admin channel-test <id>` | Test connectivity of a specific channel |
-| `/newapi-admin channel-toggle <id>` | Enable or disable a specific channel |
-| `/newapi-admin channel-priority` | View and adjust channel priority |
+| `/gravitexapi-admin channels` | List all channels and their status |
+| `/gravitexapi-admin channel-add` | Add new channels (OpenAI, Claude, Gemini, Azure, etc.) |
+| `/gravitexapi-admin channel-test <id>` | Test connectivity of a specific channel |
+| `/gravitexapi-admin channel-toggle <id>` | Enable or disable a specific channel |
+| `/gravitexapi-admin channel-priority` | View and adjust channel priority |
 
 ### User Management
 
 | Command (Planned) | Description |
 |-------------------|-------------|
-| `/newapi-admin users` | List users |
-| `/newapi-admin user-info <id>` | View user details (balance, group, usage) |
-| `/newapi-admin user-quota <id>` | Adjust user quota and balance |
-| `/newapi-admin user-group <id> <group>` | Change user's group |
-| `/newapi-admin user-ban <id>` | Ban or unban a user |
+| `/gravitexapi-admin users` | List users |
+| `/gravitexapi-admin user-info <id>` | View user details (balance, group, usage) |
+| `/gravitexapi-admin user-quota <id>` | Adjust user quota and balance |
+| `/gravitexapi-admin user-group <id> <group>` | Change user's group |
+| `/gravitexapi-admin user-ban <id>` | Ban or unban a user |
 
 ### System Configuration
 
 | Command (Planned) | Description |
 |-------------------|-------------|
-| `/newapi-admin config` | View current system configuration |
-| `/newapi-admin config-set <key> <value>` | Modify a system configuration item |
-| `/newapi-admin ratio` | View model rate multiplier settings |
-| `/newapi-admin ratio-sync` | Sync upstream model rate multipliers |
+| `/gravitexapi-admin config` | View current system configuration |
+| `/gravitexapi-admin config-set <key> <value>` | Modify a system configuration item |
+| `/gravitexapi-admin ratio` | View model rate multiplier settings |
+| `/gravitexapi-admin ratio-sync` | Sync upstream model rate multipliers |
 
 ### Logs & Monitoring
 
 | Command (Planned) | Description |
 |-------------------|-------------|
-| `/newapi-admin logs` | View recent request logs |
-| `/newapi-admin stats` | View system statistics (request volume, consumption, error rate) |
-| `/newapi-admin status` | Check system health and channel connectivity |
+| `/gravitexapi-admin logs` | View recent request logs |
+| `/gravitexapi-admin stats` | View system statistics (request volume, consumption, error rate) |
+| `/gravitexapi-admin status` | Check system health and channel connectivity |
 
 ### Token & Redemption Management
 
 | Command (Planned) | Description |
 |-------------------|-------------|
-| `/newapi-admin redemptions` | List redemption codes |
-| `/newapi-admin redemption-create` | Batch create redemption codes |
-| `/newapi-admin token-overview` | Global token usage overview |
+| `/gravitexapi-admin redemptions` | List redemption codes |
+| `/gravitexapi-admin redemption-create` | Batch create redemption codes |
+| `/gravitexapi-admin token-overview` | Global token usage overview |
 
-## Comparison with newapi Skill
+## Comparison with gravitexapi Skill
 
-| | newapi | newapi-admin |
+| | gravitexapi | gravitexapi-admin |
 |---|--------|-------------|
 | **Target Users** | Regular users / developers | Site administrators |
 | **Scope** | Personal models, tokens, balance, groups | Global channels, users, config, logs |
@@ -71,7 +71,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 ## Stay Updated
 
-newapi-admin is under active development. Follow the repository for the latest updates:
+gravitexapi-admin is under active development. Follow the repository for the latest updates:
 
 - GitHub Repository: [github.com/QuantumNous/skills](https://github.com/QuantumNous/skills)
-- Released user-level Skill: [newapi](/en/docs/skills/newapi)
+- Released user-level Skill: [gravitexapi](/en/docs/skills/gravitexapi)
