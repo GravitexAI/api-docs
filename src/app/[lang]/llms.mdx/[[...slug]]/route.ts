@@ -1,7 +1,8 @@
 import { getLLMText, source } from '@/lib/source';
 import { notFound } from 'next/navigation';
 
-export const revalidate = false;
+// Expand <APIPage /> at request time so copy-markdown includes full API details
+export const dynamic = 'force-dynamic';
 
 export async function GET(
   _req: Request,
