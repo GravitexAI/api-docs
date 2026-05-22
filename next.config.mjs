@@ -7,6 +7,11 @@ const config = {
   reactStrictMode: true,
   poweredByHeader: false,
   experimental: {
+    // Ensure OpenAPI JSON files are available at runtime for copy-markdown / llms routes
+    outputFileTracingIncludes: {
+      '/[lang]/llms.mdx/[[...slug]]': ['./openapi/generated/**/*'],
+      '/[lang]/llms-full.txt': ['./openapi/generated/**/*'],
+    },
     serverActions: {
       allowedOrigins: [
         'localhost:3000',

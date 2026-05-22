@@ -67,9 +67,15 @@ export function LLMCopyButton({
 
     try {
       const res = await fetch(markdownUrl);
+      if (!res.ok) {
+        throw new Error(`Failed to load markdown (${res.status})`);
+      }
       const content = await res.text();
       cache.set(markdownUrl, content);
       await navigator.clipboard.writeText(content);
+    } catch (error) {
+      console.error('Copy markdown failed:', error);
+      throw error;
     } finally {
       setLoading(false);
     }

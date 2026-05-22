@@ -13,11 +13,19 @@ export async function GET(
 
   if (!page) notFound();
 
-  return new Response(await getLLMText(page), {
-    headers: {
-      'Content-Type': 'text/markdown',
-    },
-  });
+  try {
+    return new Response(await getLLMText(page), {
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+      },
+    });
+  } catch (error) {
+    console.error('[llms.mdx]', slug?.join('/') ?? '', error);
+    return new Response('Failed to generate markdown for this page.', {
+      status: 500,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  }
 }
 
 export function generateStaticParams() {
