@@ -1,50 +1,53 @@
 ---
-title: OpenClaw - セルフホスト型AIスマートアシスタントプラットフォーム
-description: OpenClaw チュートリアル — OpenClaw のインストール、Gravitex API との連携、セルフホスト型AIアシスタントの迅速な構築。オープンソースプロジェクトで、Telegram、Discord、WhatsAppなど複数のチャネル統合をサポート。
+title: OpenClaw - セルフホスト型AIアシスタントプラットフォーム
+description: OpenClaw チュートリアル — OpenClawのインストール、New APIとの連携、セルフホスト型AIアシスタントの迅速な構築。オープンソースプロジェクトで、Telegram、Discord、WhatsAppなどのマルチチャネル統合をサポートしています。
 ---
 
 <Callout type="info" title="プロジェクト紹介">
-  OpenClaw は、オープンソースのセルフホスト型パーソナルAIアシスタントプラットフォームで、メッセージングアプリを自身のハードウェアで動作するAIエージェントに接続します。開発者や上級ユーザー向けに設計されており、データ制御権を手放すことなく、自律的なAIアシスタントを所有できます。
+  OpenClaw は、オープンソースでセルフホスト型の個人AI
+  アシスタントプラットフォームであり、メッセージングアプリを自身のハードウェアで動作するAI
+  エージェントに接続します。開発者や上級ユーザー向けに設計されており、データ制御を手放すことなく、自律的なAIアシスタントを所有できます。
 
-  - 公式サイト：[https://openclaw.ai](https://openclaw.ai)
+  - 公式ホームページ：[https://openclaw.ai](https://openclaw.ai)
   - プロジェクトドキュメント：[https://docs.openclaw.ai](https://docs.openclaw.ai)
   - GitHub：[https://github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
 </Callout>
 
-OpenClaw は完全にオープンソースであり、[OpenClaw のGitHubリポジトリ](https://github.com/openclaw/openclaw)でソースコードを閲覧したり、Issueを提出したり、貢献したりできます。このチュートリアルでは、OpenClaw のインストール、設定、およびGravitex APIとの連携の完全な手順を説明します。
+OpenClaw は完全にオープンソースであり、[OpenClaw の GitHub リポジトリ](https://github.com/openclaw/openclaw)でソースコードを閲覧したり、Issueを提出したり、貢献したりできます。このチュートリアルでは、OpenClaw のインストール、設定、および New API との連携の完全な手順を説明します。
 
 ## 🌟 主要機能
 
 ### マルチチャネル統合
 
-- **マルチチャネル統合**：Telegram、Discord、WhatsApp、iMessageなど、複数のメッセージチャネルをサポートし、プラグインを通じてさらに多くのプラットフォームに拡張可能
-- **単一ゲートウェイ**：単一のGatewayプロセスを通じてすべてのチャネルを一元管理
-- **音声サポート**：macOS/iOS/Androidの音声インタラクションをサポート
-- **Canvasインターフェース**：インタラクティブなCanvasインターフェースをレンダリング可能
+- **マルチチャネル統合**：Telegram、Discord、WhatsApp、iMessage など、さまざまなメッセージングチャネルをサポートし、プラグインを通じてさらに多くのプラットフォームを拡張可能
+- **単一ゲートウェイ**：Gateway プロセスを通じてすべてのチャネルを一元管理
+- **音声サポート**：macOS/iOS/Android の音声インタラクションをサポート
+- **Canvas インターフェース**：インタラクティブな Canvas インターフェースをレンダリング可能
 
 ### セルフホスティングとデータセキュリティ
 
 - **完全セルフホスティング**：自身のマシンまたはサーバー上で動作
-- **オープンソースの透明性**：MITオープンソースライセンス、コードは完全に透明
+- **オープンソースの透明性**：MIT オープンソースライセンス、コードは完全に透明
 - **データローカライゼーション**：コンテキストとスキルはクラウドではなく、ローカルコンピューターに保存
 
-### インテリジェントエージェント機能
+### AIエージェント機能
 
 - **継続実行**：バックグラウンドでの常駐実行をサポートし、永続的な記憶を持つ
-- **スケジュールタスク**：cronによる定期タスクをサポート
-- **セッション分離**：エージェント/ワークスペース/送信者ごとにセッションを分離
-- **マルチエージェントルーティング**：複数のエージェントが連携して動作することをサポート
-- **ツール呼び出し**：ツール呼び出しとコード実行をネイティブにサポート
+- **スケジュールタスク**：cron 定期タスクをサポート
+- **セッション隔離**：エージェント/ワークスペース/送信者ごとにセッションを隔離
+- **マルチエージェントルーティング**：複数のエージェントの協調動作をサポート
+- **ツール呼び出し**：ツール呼び出しとコード実行をネイティブでサポート
 
-## 📦 連携前の準備
+## 📦 導入前の準備
 
 <Callout type="info" title="準備情報">
-  - Node.js 22 以降
-  - 利用可能なGravitex APIアドレス（通常`/v1`で終わる）
-  - 利用可能なGravitex APIのAPIキー
+  - Node.js 22 以降のバージョン
+  - 利用可能な New API アドレス（通常 `/v1` で終わる）
+  - 利用可能な New API API Key
+  - ご自身でデプロイした New API を使用するか、サービスプロバイダーが合法的なアップストリーム認証とコンプライアンス義務を持つ New API サービスであることを確認してください。出所の不明な API アドレスやキーを本番環境に接続しないでください。
 </Callout>
 
-Gravitex APIとの連携を開始する前に、OpenClawの公式推奨手順に従ってGatewayとControl UIを起動しておくことをお勧めします。これにより、後で問題が発生した場合に、OpenClaw自体が起動していないのか、モデルプロバイダーの設定が間違っているのかを区別しやすくなります。
+New API を導入する前に、OpenClaw の公式推奨手順に従って Gateway と Control UI を起動しておくことをお勧めします。これにより、後で問題が発生した場合に、OpenClaw 自体が起動していないのか、モデルプロバイダーの設定が誤っているのかを区別しやすくなります。
 
 ### 1. OpenClawのインストール（macOS/Linux）
 
@@ -52,7 +55,7 @@ Gravitex APIとの連携を開始する前に、OpenClawの公式推奨手順に
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
-その他のインストール方法については、OpenClawの公式ドキュメント：[Getting Started](https://docs.openclaw.ai/start/getting-started)を参照してください。
+その他のインストール方法については、OpenClaw 公式ドキュメントの[Getting Started](https://docs.openclaw.ai/start/getting-started)を参照してください。
 
 ### 2. オンボーディングウィザードの実行
 
@@ -60,7 +63,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 openclaw onboard --install-daemon
 ```
 
-このウィザードは、基本認証、Gateway設定、およびオプションのチャネル初期化を完了します。ここでの目標は、まずOpenClawを起動し、その後デフォルトモデルをGravitex APIに切り替えることです。
+このウィザードは、基本的な認証、Gateway の設定、およびオプションのチャネル初期化を完了します。ここでの目標は、まず OpenClaw を起動し、後でデフォルトモデルを New API に切り替えることです。
 
 ### 3. GatewayとControl UIの確認
 
@@ -69,160 +72,17 @@ openclaw gateway status
 ```
 
 ```bash
-openclaw onboard
-```
-
-## 🚀 設定方法
-
-### 設定ファイルの場所
-
-OpenClawの設定ファイルは `~/.openclaw/config.json` にあります。オンボーディングウィザードで自動生成するか、手動で編集できます。
-
-### 設定例
-
-以下は、Gravitex APIをモデルプロバイダーとして使用する完全な設定例です：
-
-```json
-{
-  "meta": {
-    "lastTouchedVersion": "2026.2.1",
-    "lastTouchedAt": "2026-02-03T12:17:41.559Z"
-  },
-  "wizard": {
-    "lastRunAt": "2026-02-02T21:17:16.011Z",
-    "lastRunVersion": "2026.2.1",
-    "lastRunCommand": "onboard",
-    "lastRunMode": "local"
-  },
-  "auth": {
-    "cooldowns": {
-      "billingBackoffHoursByProvider": {}
-    }
-  },
-  "models": {
-    "providers": {
-      "newapi": {
-        "baseUrl": "https://your-newapi-domain.com/v1",
-        "apiKey": "sk-your-api-key",
-        "auth": "api-key",
-        "api": "openai-completions",
-        "models": [
-          {
-            "id": "gemini-3-flash-preview",
-            "name": "gemini-3-flash-preview",
-            "api": "openai-completions",
-            "reasoning": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "contextWindow": 128000,
-            "maxTokens": 64000
-          },
-          {
-            "id": "kimi-k2.5",
-            "name": "kimi-k2.5",
-            "api": "openai-completions",
-            "reasoning": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "contextWindow": 128000,
-            "maxTokens": 64000
-          }
-        ]
-      }
-    },
-    "bedrockDiscovery": {
-      "providerFilter": []
-    }
-  },
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "newapi/gemini-3-flash-preview",
-        "fallbacks": [
-          "newapi/kimi-k2.5"
-        ]
-      },
-      "models": {
-        "newapi/gemini-3-flash-preview": {
-          "alias": "gemini-3-flash-preview"
-        },
-        "newapi/kimi-k2.5": {
-          "alias": "kimi-k2.5"
-        }
-      },
-      "workspace": "/home/your-username/.openclaw/workspace",
-      "maxConcurrent": 4,
-      "subagents": {
-        "maxConcurrent": 8
-      }
-    }
-  },
-  "messages": {
-    "ackReactionScope": "group-mentions"
-  },
-  "commands": {
-    "native": "auto",
-    "nativeSkills": "auto"
-  },
-  "channels": {
-    "lark": {
-      "enabled": true,
-      "dmPolicy": "pairing",
-      "appId": "your-lark-app-id",
-      "appSecret": "your-lark-app-secret",
-      "groupPolicy": "allowlist",
-      "streamMode": "partial"
-    }
-  },
-  "gateway": {
-    "port": 18789,
-    "mode": "local",
-    "bind": "loopback",
-    "auth": {
-      "mode": "token",
-      "token": "your-secure-token"
-    },
-    "tailscale": {
-      "mode": "off",
-      "resetOnExit": false
-    }
-  },
-  "skills": {
-    "install": {
-      "nodeManager": "npm"
-    }
-  }
-}
-```
-
-### 主要設定項目
 openclaw dashboard
 ```
 
-ブラウザでControl UIが開ければ、OpenClawの基本動作は正常です。この段階では、Telegram、Discord、飞书などのメッセージチャネルを先に設定する必要はありません。
+ブラウザで Control UI を開くことができれば、OpenClaw の基本的な動作は正常です。この段階では、Telegram、Discord、Feishu などのメッセージングチャネルを設定する必要はありません。
 
 ### 4. 設定ファイルの特定
 
-OpenClawの設定ファイルは通常`~/.openclaw/openclaw.json`にあり、オンボーディングウィザードで生成されたものを基にさらに変更できます。
+OpenClaw の設定ファイルは通常 `~/.openclaw/openclaw.json` にあります。オンボーディングウィザードで生成されたものを基に、さらに変更を加えることができます。
 
 <Callout type="tip" title="パス関連の環境変数">
-  OpenClawを専用サービスアカウントで実行する場合、または設定/ステータスディレクトリをカスタマイズしたい場合は、以下を使用できます：
+  OpenClaw を専用サービスアカウントで実行する場合、または設定/ステータスディレクトリをカスタマイズしたい場合は、以下を使用できます。
 
   - `OPENCLAW_HOME`
   - `OPENCLAW_STATE_DIR`
@@ -231,27 +91,27 @@ OpenClawの設定ファイルは通常`~/.openclaw/openclaw.json`にあり、オ
   詳細については、公式の環境変数ドキュメント：[Environment Variables](https://docs.openclaw.ai/help/environment)を参照してください。
 </Callout>
 
-## 🚀 Gravitex APIをモデルプロバイダーとして使用する
+## 🚀 New APIをモデルプロバイダーとして使用する
 
-OpenClawは、`models.providers`を通じてカスタムまたはOpenAI互換インターフェースのモデルゲートウェイへの連携をサポートしています。Gravitex APIの場合、最も一般的な方法は、それをカスタムプロバイダーとして設定に追加し、デフォルトモデルを`newapi/モデルID`に指定することです。
+OpenClaw は、`models.providers` を介してカスタムまたは OpenAI 互換インターフェースのモデルゲートウェイを接続することをサポートしています。New API の場合、最も一般的な方法は、それをカスタムプロバイダーとして設定に追加し、デフォルトモデルを `newapi/モデルID` に指定することです。
 
 ### 連携の考え方
 
-1.  `models.providers`の下で`newapi`プロバイダーを宣言する
-2.  `baseUrl`をGravitex APIアドレスに指定し、`/v1`が含まれていることを確認する
-3.  `api`を`openai-completions`に設定する
-4.  `models`にOpenClawが使用したいモデルIDをリストする
-5.  `agents.defaults.model.primary`でデフォルトモデルを`newapi/モデルID`に切り替える
+1.  `models.providers` の下に `newapi` プロバイダーを宣言します。
+2.  `baseUrl` を New API アドレスに指定し、`/v1` が含まれていることを確認します。
+3.  `api` を `openai-completions` に設定します。
+4.  `models` に OpenClaw で使用したいモデルIDをリストします。
+5.  `agents.defaults.model.primary` でデフォルトモデルを `newapi/...` に切り替えます。
 
-### 推奨される方法：環境変数でキーを保存する
+### 推奨される方法：環境変数でAPIキーを保存する
 
-まず、現在のシェル、サービス環境、またはOpenClawが読み取れる`.env`ファイルでGravitex APIキーを提供します：
+まず、現在のシェル、サービス環境、または OpenClaw が読み取れる `.env` に New API キーを提供します。
 
 ```bash
 export NEWAPI_API_KEY="sk-your-newapi-key"
 ```
 
-次に、`openclaw.json`に以下のスニペットを追加または変更します：
+次に、`openclaw.json` に以下のスニペットを追加または変更します。
 
 ```json5
 {
@@ -285,49 +145,40 @@ export NEWAPI_API_KEY="sk-your-newapi-key"
 }
 ```
 
-これはそのままコピーする必要がある完全な設定ではなく、Gravitex APIとの連携において最も重要な部分です。`provider`、モデルID、およびデフォルトモデルの参照が正しく対応していれば、OpenClawはGravitex APIを通じて公開されているモデルリソースを呼び出すことができます。
+これはそのままコピーする必要がある完全な設定ではありませんが、New API を連携する上で最も重要な部分です。`provider`、モデルID、およびデフォルトモデルの参照が正しく対応していれば、OpenClaw は New API を介して公開されているモデルリソースを呼び出すことができます。
 
-### 主要な設定の説明
+### 主要な設定項目
 
 | 設定項目 | 説明 |
 | --- | --- |
-| `models.providers.newapi.baseUrl` | Gravitex APIデプロイアドレス、`/v1`を含める必要があります |
-| `models.providers.newapi.apiKey` | Gravitex APIトークンキー |
-| `models.providers.newapi.models` | モデルリスト、必要に応じて複数のモデルを追加 |
-| `agents.defaults.model.primary` | デフォルトのプライマリモデル、形式：`provider/model-id` |
-| `agents.defaults.model.fallbacks` | フォールバックモデルリスト、プライマリが利用不可の場合に自動切替 |
-| `channels.lark.appId` | Lark（飛書）アプリID、Larkオープンプラットフォームから取得 |
-| `channels.lark.appSecret` | Lark（飛書）アプリSecret |
-| `gateway.port` | ゲートウェイリスニングポート |
-| `gateway.auth.token` | ゲートウェイアクセスセキュリティトークン |
-| `models.mode` | `merge`に設定することをお勧めします。OpenClawの組み込みプロバイダーを保持しつつ、`newapi`を追加します。 |
-| `models.providers.newapi.baseUrl` | あなたのGravitex APIアドレス。通常`/v1`を含める必要があります。 |
-| `models.providers.newapi.apiKey` | Gravitex APIキー。`${NEWAPI_API_KEY}`を通じて注入することを推奨します。 |
-| `models.providers.newapi.api` | Gravitex APIのようなOpenAI互換ゲートウェイの場合、`openai-completions`を使用します。 |
-| `models.providers.newapi.models` | ここにリストされているモデルIDは、Gravitex APIが実際に公開しているモデル名と一致している必要があります。 |
-| `agents.defaults.model.primary` | デフォルトのプライマリモデル。形式は`provider/model-id`である必要があります。 |
+| `models.mode` | `merge` に設定することをお勧めします。これにより、OpenClaw の組み込みプロバイダーを保持しつつ、`newapi` を追加できます。 |
+| `models.providers.newapi.baseUrl` | New API のアドレス。通常 `/v1` を含める必要があります。 |
+| `models.providers.newapi.apiKey` | New API キー。`${NEWAPI_API_KEY}` を介して注入することをお勧めします。 |
+| `models.providers.newapi.api` | New API のような OpenAI 互換ゲートウェイの場合、`openai-completions` を使用します。 |
+| `models.providers.newapi.models` | ここにリストされているモデルIDは、New API が実際に公開しているモデル名と一致している必要があります。 |
+| `agents.defaults.model.primary` | デフォルトのプライマリモデル。形式は `provider/model-id` である必要があります。 |
 | `agents.defaults.model.fallbacks` | フォールバックモデルのリスト。プライマリモデルが失敗した場合に自動的に切り替わります。 |
-| `agents.defaults.models` | オプション。モデルにエイリアスを付けるために使用され、UIやセッションでの参照を容易にします。 |
+| `agents.defaults.models` | オプション。モデルにエイリアスを付けるために使用し、UI やセッションで参照しやすくします。 |
 
 ### 連携成功の確認
 
-設定が完了したら、Control UIに戻るか、再度開きます：
+設定が完了したら、Control UI に戻るか、再度開きます。
 
 ```bash
 openclaw dashboard
 ```
 
-OpenClawで正常に会話を開始でき、デフォルトモデルが`newapi/...`になっている場合、連携は成功です。また、以下を使用することもできます：
+OpenClaw で正常に会話を開始でき、デフォルトモデルが `newapi/...` になっている場合、連携は成功です。また、以下を使用することもできます。
 
 ```bash
 openclaw models list
 ```
 
-`newapi/`プレフィックスのモデルが選択可能なリストに表示されていることを確認します。
+`newapi/` プレフィックスのモデルが利用可能なリストに表示されていることを確認します。
 
-### よくある問題
+### よくある質問
 
--   `baseUrl`に`/v1`が含まれていない：これは最も一般的な連携エラーの1つです。
--   モデルIDの入力ミス：`primary`と`fallbacks`は`models.providers.newapi.models`内の`id`と一致している必要があります。
--   キーが現在のターミナルでのみ有効：Gatewayがバックグラウンドサービスとして実行されている場合、サービスプロセスも`NEWAPI_API_KEY`を読み取れることを確認してください。
--   フォアグラウンドでのトラブルシューティング：公式のフォアグラウンド実行方法`openclaw gateway --port 18789`を使用して、ログとエラーを確認できます。
+-   `baseUrl` に `/v1` が含まれていない：これは最も一般的な連携エラーの1つです。
+-   モデルIDの入力ミス：`primary` と `fallbacks` は `models.providers.newapi.models` 内の `id` と一致している必要があります。
+-   APIキーが現在のターミナルでのみ有効：Gateway がバックグラウンドサービスとして実行されている場合、サービスプロセスも `NEWAPI_API_KEY` を読み取れることを確認してください。
+-   フォアグラウンドでのトラブルシューティングを希望する場合：公式のフォアグラウンド実行方法 `openclaw gateway --port 18789` を使用して、ログとエラーを監視できます。
